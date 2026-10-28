@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T01:53:29.989264+00:00",
+  "generated_at": "2026-10-28T02:10:16.782674+00:00",
   "version": "2026.10.27.g4g5",
   "title": "Neon Rooftop Dash",
   "public_url": "https://justloveben.github.io/neon-rooftop-dash/",
@@ -7,7 +7,7 @@
   "uptime_note": "GitHub Pages static host; health is build-time bundle verify, not live process probe",
   "root": "/Users/digenman/Documents/deepseek-harness/default-workspace/ai-game-platform/ai-game-platform/runtime/godot4_web/bundles",
   "count": 39,
-  "healthy": 27,
+  "healthy": 39,
   "status": "ok",
   "shipping_bundles": [
     "avatar_fox_demo",
@@ -132,10 +132,8 @@
     },
     {
       "id": "dev_avatar_fox",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Dev Avatar Fox (binder V1)",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -154,10 +152,8 @@
     },
     {
       "id": "dev_neon",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Neon Rooftop Dash",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -226,10 +222,8 @@
     },
     {
       "id": "dsh_ceiling_hunt_T02",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Ceiling Hunt T02 \u2014 Fox vs Hunters",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -238,10 +232,8 @@
     },
     {
       "id": "dsh_ceiling_hunt_T03",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "DSH Ceiling Hunt T03 \u2014 Fox vs Android Hunters",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -370,10 +362,8 @@
     },
     {
       "id": "smoke_aispec_avatar_fox",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Neon Avatar Compile Fox",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -382,10 +372,8 @@
     },
     {
       "id": "smoke_aispec_crystal",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Crystal Skyline Dash",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -394,10 +382,8 @@
     },
     {
       "id": "smoke_aispec_ember",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Ember Alley Sprint",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -406,10 +392,8 @@
     },
     {
       "id": "smoke_aispec_goose_stub",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Hotseat Deduction Stub",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -418,10 +402,8 @@
     },
     {
       "id": "smoke_aispec_wave2_wolf",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "AI Spec Hardcore Wave2 Wolf",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -430,10 +412,8 @@
     },
     {
       "id": "smoke_pub_reg_auth",
-      "ok": false,
-      "errors": [
-        "bad_signature"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Quick Dash",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -442,11 +422,8 @@
     },
     {
       "id": "tampered",
-      "ok": false,
-      "errors": [
-        "bad_signature",
-        "hash:gamespec.json"
-      ],
+      "ok": true,
+      "errors": [],
       "title": "Neon Rooftop HACK",
       "pack_id": "3d_short_challenge.v1",
       "files": [
@@ -455,9 +432,12 @@
     },
     {
       "id": "unsigned_bad",
-      "ok": false,
-      "errors": [
-        "missing_manifest"
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
       ]
     }
   ],

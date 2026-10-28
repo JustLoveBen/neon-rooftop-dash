@@ -96,6 +96,26 @@ body {
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
 	<link rel="icon" href="favicon.ico" sizes="any"/>
+<!-- AIGAME_PWA_V23_HEAD -->
+<link rel="manifest" href="./manifest.webmanifest"/>
+<meta name="theme-color" content="#7b2fff"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Neon Dash"/>
+<link rel="apple-touch-icon" sizes="180x180" href="./index.apple-touch-icon.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png"/>
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png"/>
+<style id="aigame-pwa-style">
+#aigame-pwa-chrome{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:2147483000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+#aigame-pwa-chrome button{pointer-events:auto;width:34px;height:54px;border-radius:0 12px 12px 0;border:1px solid rgba(123,47,255,.78);border-left:0;background:rgba(8,12,24,.74);color:#d9a7ff;font:700 18px/1 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.45);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#aigame-pwa-chrome button:hover{filter:brightness(1.16)}
+#aigame-pwa-chrome button[aria-pressed="true"]{color:#3dffa8;border-color:#3dffa8}
+#aigame-pwa-chrome button:focus-visible{outline:2px solid #3dffa8;outline-offset:2px}
+#run-install{color:#3dffa8;border-color:rgba(61,255,168,.75)}
+@media (min-width:900px){#aigame-pwa-chrome{left:calc(6px + env(safe-area-inset-left,0px))}#aigame-pwa-chrome button{width:auto;min-width:46px;height:44px;padding:0 12px;font-size:13px;border-radius:10px;border-left:1px solid rgba(123,47,255,.78)}}
+</style>
+<!-- /AIGAME_PWA_V23_HEAD -->
 </head>
 	<body>
 		<canvas id="canvas">
@@ -222,6 +242,15 @@ const engine = new Engine(GODOT_CONFIG);
 <script src="leaderboard.js"></script>
 <script src="telemetry.js"></script>
 <script>window.AIGAME_TELEMETRY&&AIGAME_TELEMETRY.ping("game_shell_load",{build:"web_release"});</script>
+<!-- AIGAME_PWA_V23_BODY -->
+<div id="aigame-pwa-chrome" role="group" aria-label="PWA controls">
+  <button type="button" id="run-fullscreen" data-pwa-fullscreen data-compact="1" data-icon-only="1"
+          aria-pressed="false" title="Fullscreen / 全屏" aria-label="Toggle fullscreen">⛶</button>
+  <button type="button" id="run-install" data-pwa-install hidden
+          title="Install app / 安装应用" aria-label="Install app">＋</button>
+</div>
+<script src="./pwa.js"></script>
+<!-- /AIGAME_PWA_V23_BODY -->
 </body>
 </html>
 
