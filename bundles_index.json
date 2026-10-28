@@ -1,0 +1,465 @@
+{
+  "generated_at": "2026-10-28T01:14:07.681067+00:00",
+  "version": "2026.10.27.g4g5",
+  "title": "Neon Rooftop Dash",
+  "public_url": "https://justloveben.github.io/neon-rooftop-dash/",
+  "health_url": "https://justloveben.github.io/neon-rooftop-dash/bundles_index.json",
+  "uptime_note": "GitHub Pages static host; health is build-time bundle verify, not live process probe",
+  "root": "runtime/godot4_web/bundles",
+  "count": 39,
+  "healthy": 27,
+  "status": "ok",
+  "shipping_bundles": [
+    "avatar_fox_demo",
+    "avatar_human_demo",
+    "avatar_mech_demo",
+    "avatar_monster_demo",
+    "avatar_wolf_demo",
+    "crystal_skyline_dash_84031",
+    "dsh_ceiling_hunt_T04",
+    "neon_rooftop_84021",
+    "neon_rooftop_84022",
+    "neon_rooftop_84023",
+    "neon_rooftop_avatar_mech",
+    "neon_rooftop_avatar_monster",
+    "neon_rooftop_avatar_wolf"
+  ],
+  "ai_created_bundles": [
+    "crystal_skyline_dash_84031",
+    "ember_alley_sprint_84032"
+  ],
+  "leaderboard_stub": {
+    "enabled": true,
+    "mode": "local_device_v1",
+    "storage": "localStorage:aigame_neon_lb_v1",
+    "note": "Browser-local leaderboard + JSON export/import on landing.html; no server secrets. Shared tops are manual paste only.",
+    "ui": "landing.html#leaderboard",
+    "top": []
+  },
+  "telemetry": {
+    "mode_default": "local_only",
+    "events": [
+      "boot",
+      "win",
+      "lose",
+      "reject",
+      "landing_view",
+      "game_shell_load"
+    ],
+    "inspect": "console [aigame-telemetry] + localStorage aigame_neon_telem_v1 + AIGAME_TELEMETRY.dump()",
+    "optional_beacon": "Set window.AIGAME_TELEMETRY_URL (e.g. https://httpbin.org/post) before load; smoke only"
+  },
+  "bundles": [
+    {
+      "id": "aispec_avatar_fox_84095",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Avatar Compile Fox",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "aispec_hardcore_wave2_84150",
+      "ok": true,
+      "errors": [],
+      "title": "AI Spec Hardcore Wave2 Wolf",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "avatar_fox_demo",
+      "ok": true,
+      "errors": [],
+      "title": "Avatar Demo: Fox",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "avatar_human_demo",
+      "ok": true,
+      "errors": [],
+      "title": "Avatar Demo: Human",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "avatar_mech_demo",
+      "ok": true,
+      "errors": [],
+      "title": "Avatar Demo: Mech",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "avatar_monster_demo",
+      "ok": true,
+      "errors": [],
+      "title": "Avatar Demo: Monster",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "avatar_wolf_demo",
+      "ok": true,
+      "errors": [],
+      "title": "Avatar Demo: Wolf",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "crystal_skyline_dash_84031",
+      "ok": true,
+      "errors": [],
+      "title": "Crystal Skyline Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dev_avatar_fox",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Dev Avatar Fox (binder V1)",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dev_env_trees",
+      "ok": true,
+      "errors": [],
+      "title": "Env Trees Demo (Oak+Pine sway)",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dev_neon",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Neon Rooftop Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_B",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_C",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_D",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_D_slide",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_E",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_OPT_E_slide",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_T02",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Ceiling Hunt T02 \u2014 Fox vs Hunters",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_T03",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "DSH Ceiling Hunt T03 \u2014 Fox vs Android Hunters",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_T04",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "dsh_ceiling_hunt_T05",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Android Hunt",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "ember_alley_sprint_84032",
+      "ok": true,
+      "errors": [],
+      "title": "Ember Alley Sprint",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_hardcore_combat_84123",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Hardcore Combat",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_hardcore_combat_84124",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Hardcore Combat: Alley Pincer",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_hardcore_combat_84125",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Hardcore Combat: Core Breach",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_84021",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_84022",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop \u2014 Checkpoint Run",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_84023",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop \u2014 Hardcore Night",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_avatar_mech",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Dash \u2014 Mech",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_avatar_monster",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Dash \u2014 Monster",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "neon_rooftop_avatar_wolf",
+      "ok": true,
+      "errors": [],
+      "title": "Neon Rooftop Dash \u2014 Wolf",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_aispec_avatar_fox",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Neon Avatar Compile Fox",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_aispec_crystal",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Crystal Skyline Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_aispec_ember",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Ember Alley Sprint",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_aispec_goose_stub",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Hotseat Deduction Stub",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_aispec_wave2_wolf",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "AI Spec Hardcore Wave2 Wolf",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "smoke_pub_reg_auth",
+      "ok": false,
+      "errors": [
+        "bad_signature"
+      ],
+      "title": "Quick Dash",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "tampered",
+      "ok": false,
+      "errors": [
+        "bad_signature",
+        "hash:gamespec.json"
+      ],
+      "title": "Neon Rooftop HACK",
+      "pack_id": "3d_short_challenge.v1",
+      "files": [
+        "gamespec.json"
+      ]
+    },
+    {
+      "id": "unsigned_bad",
+      "ok": false,
+      "errors": [
+        "missing_manifest"
+      ]
+    }
+  ],
+  "multipack": null
+}

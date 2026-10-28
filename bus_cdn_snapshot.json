@@ -1,0 +1,221 @@
+{
+  "schema": "aigame.bus_cdn_snapshot.v0",
+  "schema_version": 0,
+  "generated_at": "2026-10-27T17:23:52+08:00",
+  "timezone": "Asia/Singapore",
+  "readonly": true,
+  "content_sha256": "99f7bb15b1b23b2eb53dc05fcf858d0ff604983f3e83f90fa21b624f4914f1f7",
+  "etag_note": "Weak content fingerprint content_sha256=99f7bb15b1b23b2e… — clients may send If-None-Match against CDN/file ETag; GH Pages supplies its own ETag independently of this field.",
+  "leaderboard_url_hint": "bus_leaderboard_snapshot.json",
+  "note": "Composite read-only bus CDN snapshot for static hosting. Empty sections are honest. Not a live bus; live ?bus= remains optional. Landing weekly LB continues to consume bus_leaderboard_snapshot.json.",
+  "sections": {
+    "health": {
+      "status": "ok",
+      "version": "l3-bus-v0",
+      "services": [
+        "health",
+        "bundle_registry",
+        "leaderboard",
+        "matchmaking"
+      ],
+      "bundle_count": 23,
+      "healthy_bundles": 21,
+      "empty_honest": false,
+      "note": "health inferred from local registry scan (no live bus)"
+    },
+    "registry": {
+      "count": 23,
+      "ok_count": 21,
+      "bundles": [
+        {
+          "id": "aispec_hardcore_wave2_84150",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "AI Spec Hardcore Wave2 Wolf",
+          "errors": []
+        },
+        {
+          "id": "avatar_fox_demo",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Avatar Demo: Fox",
+          "errors": []
+        },
+        {
+          "id": "avatar_human_demo",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Avatar Demo: Human",
+          "errors": []
+        },
+        {
+          "id": "avatar_wolf_demo",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Avatar Demo: Wolf",
+          "errors": []
+        },
+        {
+          "id": "crystal_skyline_dash_84031",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Crystal Skyline Dash",
+          "errors": []
+        },
+        {
+          "id": "dev_avatar_fox",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Dev Avatar Fox (binder V1)",
+          "errors": []
+        },
+        {
+          "id": "dev_env_trees",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Dev Env Trees (prop bind V0)",
+          "errors": []
+        },
+        {
+          "id": "dev_neon",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop Dash",
+          "errors": []
+        },
+        {
+          "id": "ember_alley_sprint_84032",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Ember Alley Sprint",
+          "errors": []
+        },
+        {
+          "id": "neon_hardcore_combat_84123",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Hardcore Combat",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_84021",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop Dash",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_84022",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop — Checkpoint Run",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_84023",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop — Hardcore Night",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_avatar_mech",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop Dash — Mech",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_avatar_monster",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop Dash — Monster",
+          "errors": []
+        },
+        {
+          "id": "neon_rooftop_avatar_wolf",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop Dash — Wolf",
+          "errors": []
+        },
+        {
+          "id": "smoke_aispec_avatar_fox",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Avatar Compile Fox",
+          "errors": []
+        },
+        {
+          "id": "smoke_aispec_crystal",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Crystal Skyline Dash",
+          "errors": []
+        },
+        {
+          "id": "smoke_aispec_ember",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Ember Alley Sprint",
+          "errors": []
+        },
+        {
+          "id": "smoke_aispec_wave2_wolf",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "AI Spec Hardcore Wave2 Wolf",
+          "errors": []
+        },
+        {
+          "id": "smoke_pub_reg_auth",
+          "ok": true,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Quick Dash",
+          "errors": []
+        },
+        {
+          "id": "tampered",
+          "ok": false,
+          "pack_id": "3d_short_challenge.v1",
+          "title": "Neon Rooftop HACK",
+          "errors": [
+            "hash:gamespec.json"
+          ]
+        },
+        {
+          "id": "unsigned_bad",
+          "ok": false,
+          "pack_id": null,
+          "title": null,
+          "errors": [
+            "missing_manifest"
+          ]
+        }
+      ],
+      "empty_honest": false,
+      "note": "scanned local bundles_root"
+    },
+    "leaderboard": {
+      "schema": "aigame.bus_leaderboard_snapshot.v0",
+      "week_id": "2026-W44",
+      "bundle_id": "neon_hardcore_combat_84123",
+      "game_id": "neon_rooftop_dash",
+      "entries": [],
+      "row_count": 0,
+      "updated_at": "2026-10-27T17:23:52+08:00",
+      "generated_at": "2026-10-27T17:23:52+08:00",
+      "timezone": "Asia/Singapore",
+      "content_sha256": "07286147950d0c80151cb8315dcb9370bad2685f7a65f61ced633eeafb1e36cb",
+      "empty_honest": true,
+      "file_hint": "bus_leaderboard_snapshot.json"
+    },
+    "matchmaking": {
+      "included": false,
+      "count": 0,
+      "rooms": [],
+      "empty_honest": true,
+      "note": "matchmaking omitted (pass --include-mm to export room list snapshot)"
+    }
+  }
+}

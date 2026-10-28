@@ -1,0 +1,317 @@
+{
+ "schema": "aigame.weekly_challenge.v0",
+ "timezone": "Asia/Shanghai",
+ "iso_week": true,
+ "default_bundle_id": "neon_hardcore_combat_84123",
+ "rotation": "ISO week_number % len(presets); overrides via weeks{} keys",
+ "presets": [
+  {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  {
+   "bundle_id": "neon_rooftop_84022",
+   "title": "Weekly Checkpoint Focus",
+   "goal": "This slot still features Checkpoint Run — clear yellow rings then the green pad (prior mode stays reachable).",
+   "goal_zh": "本档仍为 Checkpoint Run：黄环全清再踩绿台（旧模式仍可达）。",
+   "pack_id": "3d_short_challenge.v1"
+  }
+ ],
+ "how_to_rotate": [
+  "Client computes ISO week id in Asia/Shanghai (weekly.js).",
+  "Lookup weeks[week_id]; if missing, fall back to presets[week_number % N] + synthesized ops_seed_label.",
+  "Landing Play button → index.html?bundle=<id>&weekly=1&week=<week_id>.",
+  "V1 (optional): publish signed weekly bundles with layout.seed derived from ops_seed; keep BundleGate.",
+  "To hand-edit a week: add/replace key under weeks in this JSON and redeploy ops overlay (no wasm required for copy-only).",
+  "Multipack: set pack_id on weeks/presets from REGISTERED_PACKS (3d_short_challenge.v1 primary; goose_hotseat.v1 only via pack_seeds / ops).",
+  "V9: a second signed arena (neon_hardcore_combat_84124 Alley Pincer) is linked from landing; weekly default stays 84123 W44 until an explicit rotation lands in weeks{}.",
+  "V10: campaign is a separate primary CTA (campaign=1 on A); weekly featured stays 84123/W44 until an explicit weeks{} rotation.",
+  "V11: signed campaign chain is A(84123) → B(84124) → C(84125 Core Breach); campaign-only HP carry, win only after C. Weekly featured stays 84123/W44."
+ ],
+ "weeks": {
+  "2026-W44": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W44",
+   "week_number": 44,
+   "year": 2026,
+   "starts": "2026-10-26",
+   "ends": "2026-11-01",
+   "ops_seed_label": "2026-W44-88644",
+   "layout_note": "V11: featured weekly stays neon_hardcore_combat_84123 (Rooftop Hunt, W44) with layout.seed unchanged for BundleGate; the V11 primary CTA is a separate A→B→C campaign (index.html?bundle=neon_hardcore_combat_84123&campaign=1) that clears A, rebuilds B (84124) in-run, then rebuilds the signed finale C (84125 Core Breach) in the same run. Campaign-only HP carry: HP stashed at each stage win and restored after the next boot (HP CARRIES BETWEEN STAGES / 生命值跨阶段保留); solo A/B/C still boot at full HP. Campaign win only after C (stage 3/3). Honest choice: do NOT silently swap the featured weekly to a campaign-only bundle. Solo A HUNT_FULL=1635 ticks (unchanged), solo B=1215 (unchanged), solo C Core Breach HUNT_FULL=2565 ticks on 11 hunters. Weekly stays 84123/W44.",
+   "pack_id": "3d_short_challenge.v1",
+   "campaign_url": "index.html?bundle=neon_hardcore_combat_84123&campaign=1"
+  },
+  "2026-W45": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W45",
+   "week_number": 45,
+   "year": 2026,
+   "starts": "2026-11-02",
+   "ends": "2026-11-08",
+   "ops_seed_label": "2026-W45-88645",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W46": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W46",
+   "week_number": 46,
+   "year": 2026,
+   "starts": "2026-11-09",
+   "ends": "2026-11-15",
+   "ops_seed_label": "2026-W46-88646",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W47": {
+   "bundle_id": "neon_rooftop_84022",
+   "title": "Weekly Checkpoint Focus",
+   "goal": "This week features Checkpoint Run — clear all yellow rings then the green pad.",
+   "goal_zh": "本周主打 Checkpoint Run：黄环全清再踩绿台。",
+   "week_id": "2026-W47",
+   "week_number": 47,
+   "year": 2026,
+   "starts": "2026-11-16",
+   "ends": "2026-11-22",
+   "ops_seed_label": "2026-W47-88647",
+   "layout_note": "V0: signed bundle layout.seed unchanged (BundleGate). ops_seed_label is the shared weekly challenge id.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W48": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W48",
+   "week_number": 48,
+   "year": 2026,
+   "starts": "2026-11-23",
+   "ends": "2026-11-29",
+   "ops_seed_label": "2026-W48-88648",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W49": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W49",
+   "week_number": 49,
+   "year": 2026,
+   "starts": "2026-11-30",
+   "ends": "2026-12-06",
+   "ops_seed_label": "2026-W49-88649",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W50": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W50",
+   "week_number": 50,
+   "year": 2026,
+   "starts": "2026-12-07",
+   "ends": "2026-12-13",
+   "ops_seed_label": "2026-W50-88650",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W51": {
+   "bundle_id": "neon_rooftop_84022",
+   "title": "Weekly Checkpoint Focus",
+   "goal": "This week features Checkpoint Run — clear all yellow rings then the green pad.",
+   "goal_zh": "本周主打 Checkpoint Run：黄环全清再踩绿台。",
+   "week_id": "2026-W51",
+   "week_number": 51,
+   "year": 2026,
+   "starts": "2026-12-14",
+   "ends": "2026-12-20",
+   "ops_seed_label": "2026-W51-88651",
+   "layout_note": "V0: signed bundle layout.seed unchanged (BundleGate). ops_seed_label is the shared weekly challenge id.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W52": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W52",
+   "week_number": 52,
+   "year": 2026,
+   "starts": "2026-12-21",
+   "ends": "2026-12-27",
+   "ops_seed_label": "2026-W52-88652",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2026-W53": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2026-W53",
+   "week_number": 53,
+   "year": 2026,
+   "starts": "2026-12-28",
+   "ends": "2027-01-03",
+   "ops_seed_label": "2026-W53-88653",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2027-W01": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2027-W01",
+   "week_number": 1,
+   "year": 2027,
+   "starts": "2027-01-04",
+   "ends": "2027-01-10",
+   "ops_seed_label": "2027-W01-88701",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  },
+  "2027-W02": {
+   "bundle_id": "neon_hardcore_combat_84123",
+   "title": "Hardcore Combat — Weekly Hunt (V8: Mech Attack + Spider Run + Phone Mix + Pincer Tell)",
+   "goal": "Clear 3 hunter waves (8 hunters) with PULSE; V8 closes the animation gaps — the mech now plays a synthetic attack role with a procedural shoulder-piston punch and the spider gets a distinct faster run clip (no vendor GLB edits) — and masters the phone mix: combat one-shots sit 14 dB above the ambience bed and EMP/hit duck the footstep layer (SMOKE_SFX duck=1 combat_above_ambi=1). Pincer pressure gets an earlier two-hunter pre-tell plus a partner ground ring and a dedicated HUD strip, with V6's 16-tick delay, 38-tick hold and every hunter stat unchanged (no softener). V7 hit/death cam, same-side cover nav (HUNT_FULL still 1635 ticks), anim_v1 loops, mid-wave SURGE, V6 audio/debris/pincer/EMP stay. Chain 4 PULSE hits for an EMP stun; avoid toxic zones, then extract.",
+   "goal_zh": "PULSE 清 3 波共 8 名猎人；V8 补齐动画缺口——机甲新增合成攻击动作 + 程序化肩部活塞拳，蜘蛛获得独立的更快奔跑 clip（不改 vendor GLB）；并做手机混音：战斗单发音效高于环境底噪 14 dB，EMP/命中时脚步自动压低（SMOKE_SFX duck=1 combat_above_ambi=1）。夹击新增更早的双猎人预警 + 伙伴地面红环 + 专用 HUD 提示条，V6 的 16 tick 预提交延迟、38 tick 持续与全部猎人数值不变（不软化）。V7 受击/死亡镜头、同侧掩体导航（HUNT_FULL 仍 1635 tick）、anim_v1 循环、中波 SURGE、V6 音频/碎块/夹击/EMP 全部保留。PULSE 连击 4 次触发 EMP 眩晕；避开毒区后撤离。",
+   "week_id": "2027-W02",
+   "week_number": 2,
+   "year": 2027,
+   "starts": "2027-01-11",
+   "ends": "2027-01-17",
+   "ops_seed_label": "2027-W02-88702",
+   "layout_note": "V8: signed bundle layout.seed unchanged (BundleGate). Featured play = neon_hardcore_combat_84123. Anim: dsh_anim_v2 -> mech synthetic attack role + procedural shoulder piston (unnamed joints), spider distinct fast run clip; no vendor GLB edit. Mix: dsh_sfx_mix_v1 -> combat one-shots 14 dB above ambience, EMP/hit duck footstep to -42 dB for 36 ticks. Pincer: dsh_pincer_fair_v1 -> earlier two-hunter pre-tell + partner ring + dedicated HUD strip, V6 delay 16 / hold 38 and all hunter stats unchanged. HUNT_FULL clear remains 1635 ticks (cap 3200). V7 juice/nav/anim_v1/midwave and V6 audio/debris/pincer/EMP preserved.",
+   "pack_id": "3d_short_challenge.v1"
+  }
+ },
+ "default_pack_id": "3d_short_challenge.v1",
+ "pack_bind": "REGISTERED_PACKS",
+ "pack_bind_note": "Each preset/week declares pack_id ∈ REGISTERED_PACKS. Public featured (default + current ISO week) stays 3d_short_challenge.v1 — do NOT force landing to goose_hotseat.v1.",
+ "pack_seeds": {
+  "goose_hotseat.v1": {
+   "status": "validation_ready",
+   "pack_id": "goose_hotseat.v1",
+   "featured": false,
+   "example_bundle_id": "smoke_aispec_goose_stub",
+   "note": "Stub Genre Pack seed for ops/smoke only. Public landing weekly stays primary."
+  }
+ },
+ "campaign": {
+  "id": "dsh_campaign_v1",
+  "entry_url": "index.html?bundle=neon_hardcore_combat_84123&campaign=1",
+  "total_stages": 3,
+  "stages": [
+   "neon_hardcore_combat_84123",
+   "neon_hardcore_combat_84124",
+   "neon_hardcore_combat_84125"
+  ],
+  "stage_labels_en": [
+   "STAGE 1 — ROOFTOP HUNT",
+   "STAGE 2 — ALLEY PINCER",
+   "STAGE 3 — CORE BREACH (FINALE)"
+  ],
+  "stage_labels_zh": [
+   "第一阶段 — 屋顶狩猎",
+   "第二阶段 — 巷战夹击",
+   "第三阶段 — 终局 · 核心突破"
+  ],
+  "hp_carry": {
+   "enabled": true,
+   "scope": "campaign_only",
+   "hud_en": "HP CARRIES BETWEEN STAGES",
+   "hud_zh": "生命值跨阶段保留",
+   "rule": "HP is stashed from the ceiling boot at each stage win and restored after the next stage boots; solo A/B/C always start at full HP; death on any stage ends the campaign"
+  },
+  "win_rule": "campaign_win only after stage 3 (84125 Core Breach) clear; stage 1/2 clears advance, never win",
+  "fail_rule": "death/timeout on any stage ends the campaign attempt",
+  "weekly_choice": "weekly 2026-W44 stays 84123 Rooftop Hunt; campaign is the primary landing CTA, not a weekly rotation",
+  "tiers": {
+   "allowed": [
+    "casual",
+    "core",
+    "hardcore"
+   ],
+   "default": "hardcore",
+   "url_param": "tier",
+   "storage_key": "aigame_tier_v1",
+   "hardcore": "identity / V11 numbers unchanged",
+   "core": {
+    "player_hp": 120,
+    "hunter_hp": "2/2/3 unchanged",
+    "hunter_speed": "1.6/3.7 unchanged",
+    "contact_damage": 12,
+    "contact_cooldown_s": 1.1,
+    "stamina_cost": 34,
+    "stamina_regen_s": 20,
+    "stamina_regen_delay_ms": 500,
+    "pulse_need": 4,
+    "pulse_window_ms": 2800,
+    "emp_radius_mul": 1.5
+   },
+   "casual": {
+    "player_hp": 150,
+    "hunter_hp": "2/2/3 unchanged",
+    "hunter_speed": "1.6/3.7 unchanged",
+    "contact_damage": 9,
+    "contact_cooldown_s": 1.3,
+    "stamina_cost": 28,
+    "stamina_regen_s": 26,
+    "stamina_regen_delay_ms": 350,
+    "pulse_need": 4,
+    "pulse_window_ms": 3400,
+    "emp_radius_mul": 1.6
+   }
+  },
+  "leaderboard": {
+   "kind": "campaign_clear_time",
+   "week_storage_key": "aigame_neon_lb_week_v1:<week>",
+   "default_week": "2026-W44",
+   "rank_field": "elapsed_ms (= campaign_total_ms, total clear time)",
+   "payload_fields": [
+    "campaign",
+    "campaign_win",
+    "tier",
+    "campaign_total_ticks",
+    "campaign_total_sec",
+    "campaign_total_ms",
+    "campaign_stage_ticks",
+    "campaign_stage=3",
+    "campaign_stages=3",
+    "bundle_chain"
+   ],
+   "readback": "AIGAME_LEADERBOARD.bestCampaign(week,{tier}) / topCampaign()"
+  }
+ }
+}

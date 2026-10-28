@@ -1,0 +1,7 @@
+build=web_release
+feature=aigame_release
+allow_unsigned_dev=false
+AIGAME_PROD=1
+AIGAME_REQUIRE_PROD_KEY=1
+prod_inject=1
+exported_at=2026-10-28 09:14:03 +08

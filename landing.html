@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Neon Rooftop Dash — Hardcore Combat V21 pause + settings: Esc / gamepad Start / on-screen Pause freezes the deterministic combat tick (a `_paused` flag, never Engine.time_scale), hides the touch stick, and offers Resume / Settings / Retry / Quit in EN+ZH. Settings sliders (Master, SFX, Music, touch stick sensitivity 0.5–1.5×) apply immediately and persist in localStorage key `aigame_settings_v1`, shared with a landing Settings panel. V20 live weekly leaderboard submit: on a campaign or solo clear the game writes device localStorage first, then — only when an ops L3 bus URL is reachable and auth is accepted — submits through the existing bus /bus/v0/call leaderboard.submit contract and repaints the week board from the live top with an honest Live | Device | Snapshot source badge. Bus absent, offline, timed out, CORS- or token-rejected falls back softly to Device + the read-only CDN snapshot; it never claims Live. GitHub Pages is static hosting and cannot be an always-on bus: a stranger-facing Live board needs an ops HTTPS bus + CORS + token distribution. Core game is unchanged from V19: analog touch stick + DASH/EMP/JUMP, phone-safe 390x844 / 844x390 HUD, Arena C residuals closed, geometry navmesh, HUNT_FULL A 1335 / B 1080 / C 1050 with no HP/speed/wave/AI soften. Weekly default stays 84123 / 2026-W44 / hardcore."/>
+  <meta name="theme-color" content="#7b2fff"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Neon Rooftop Dash"/>
+  <meta property="og:title" content="Neon Rooftop Dash — 1–2 min playtest"/>
+  <meta property="og:description" content="Browser neon rooftop dash (no install). V19 touch stick + DASH/EMP + phone HUD; Classic / Checkpoint / Hardcore Night + AI-made + DSH ceiling hunt. Leave 1–2 min feedback."/>
+  <meta property="og:url" content="https://justloveben.github.io/neon-rooftop-dash/landing.html"/>
+  <meta property="og:image" content="https://justloveben.github.io/neon-rooftop-dash/index.png"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Neon Rooftop Dash — playtest"/>
+  <meta name="twitter:description" content="1–2 min browser neon rooftop dash. V21 pause + settings, V20 live weekly LB, analog touch stick + DASH/EMP + phone-safe HUD. Feedback welcome."/>
+  <meta name="twitter:image" content="https://justloveben.github.io/neon-rooftop-dash/index.png"/>
+  <title>Neon Rooftop Dash</title>
+  <link rel="icon" href="./favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" href="./index.icon.png"/>
+  <link rel="apple-touch-icon" href="./index.apple-touch-icon.png"/>
+  <style>
+    :root { --bg:#070a12; --card:#121826; --line:#2a3550; --txt:#e8f0ff; --mut:#9ab; --acc:#7b2fff; --acc2:#d9a7ff; --ok:#3dffa8; }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(1200px 600px at 20% -10%,#1a1040 0%,var(--bg) 55%);color:var(--txt);margin:0;padding:2rem 1rem;line-height:1.55;min-height:100vh}
+    .wrap{max-width:42rem;margin:0 auto}
+    .card{background:var(--card);padding:1.6rem 1.8rem;border-radius:14px;border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.35);margin-bottom:1rem}
+    h1{margin:0 0 .35rem;color:var(--acc2);font-size:1.85rem;letter-spacing:.02em}
+    h2{font-size:1.05rem;margin:1.2rem 0 .4rem}
+    .pitch{font-size:1.05rem;margin:.4rem 0 1rem}
+    .zh{color:var(--mut);font-size:.95rem;margin:-.4rem 0 1.1rem}
+    .btn{display:inline-block;margin:.35rem .5rem .35rem 0;padding:.75rem 1.15rem;background:var(--acc);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;border:0;cursor:pointer;font:inherit}
+    .btn.secondary{background:#243049;color:#fff}
+    .btn:hover{filter:brightness(1.08)}
+    .muted{color:var(--mut);font-size:.92rem}
+    ul{padding-left:1.15rem;margin:.4rem 0 1rem}
+    li{margin:.25rem 0}
+    .tag{display:inline-block;font-size:.72rem;padding:.15rem .5rem;border:1px solid var(--line);border-radius:999px;color:var(--ok);margin-right:.35rem}
+    footer{margin-top:1.25rem;font-size:.8rem;color:var(--mut)}
+    code{background:#0b1020;padding:.1rem .35rem;border-radius:4px}
+    table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.5rem 0}
+    th,td{text-align:left;padding:.35rem .4rem;border-bottom:1px solid var(--line)}
+    th{color:var(--mut);font-weight:600}
+    .ops{font-size:.82rem}
+    textarea{width:100%;min-height:5rem;background:#0b1020;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:.5rem;font-family:ui-monospace,monospace;font-size:.75rem}
+    .weekly-card{border-color:#5b3dff;background:linear-gradient(160deg,#1a1240 0%,var(--card) 55%)}
+    .weekly-meta{font-size:.82rem;color:var(--mut);margin:.25rem 0 .6rem}
+    .weekly-seed{font-family:ui-monospace,monospace;color:var(--ok)}
+    .lb-source{display:inline-block;font-size:.72rem;padding:.15rem .55rem;border:1px solid var(--line);border-radius:999px;margin-right:.35rem;font-weight:700;letter-spacing:.02em;cursor:help;vertical-align:middle}
+    .lb-source[data-source="live"]{color:#04120b;background:var(--ok);border-color:var(--ok);box-shadow:0 0 0 2px rgba(61,255,168,.18)}
+    .lb-source[data-source="snapshot"]{color:#1a1204;background:#ffd166;border-color:#ffd166}
+    .lb-source[data-source="device"]{color:#cfe0ff;background:#243049;border-color:#3f5d8f}
+    .lb-source-note{font-size:.82rem;color:var(--mut);margin:.15rem 0 .45rem}
+    .lb-src-live{color:var(--ok);font-weight:600}
+    .lb-src-snapshot{color:#ffd166;font-weight:600}
+    .lb-src-device{color:#9fc0ff;font-weight:600}
+    .ai-card{border-color:#00c2a8;background:linear-gradient(160deg,#0d2a28 0%,var(--card) 55%)}
+    .ai-note{font-size:.82rem;color:var(--mut);margin:.35rem 0 .7rem}
+  
+    .gallery-card{border-color:#3d6bff;background:linear-gradient(160deg,#101834 0%,var(--card) 55%)}
+    .gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:.6rem 0 .85rem}
+    @media (max-width:420px){.gallery-grid{grid-template-columns:1fr}}
+    .gallery-tile{display:block;padding:.7rem .8rem;background:#0b1020;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--txt);min-height:3.2rem}
+    .gallery-tile:hover{border-color:var(--acc);filter:brightness(1.06)}
+    .gallery-tile strong{display:block;font-size:.95rem;color:var(--acc2)}
+    .gallery-tile span{display:block;font-size:.72rem;color:var(--mut);margin-top:.15rem;line-height:1.35;word-break:break-word}
+    .gallery-share{font-size:.88rem;margin:.35rem 0 .7rem;padding:.55rem .7rem;background:#0b1020;border-left:3px solid var(--ok);border-radius:0 8px 8px 0}
+
+    .settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem .95rem;margin:.6rem 0 .3rem}
+    @media (max-width:520px){.settings-grid{grid-template-columns:1fr}}
+    .setting{background:#0b1020;border:1px solid var(--line);border-radius:10px;padding:.55rem .7rem}
+    .setting label{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;font-size:.82rem;color:var(--mut);margin-bottom:.2rem}
+    .setting label strong{color:var(--txt);font-weight:600}
+    .setting output{color:var(--ok);font-variant-numeric:tabular-nums}
+    .setting input[type=range]{width:100%;height:44px;margin:0;accent-color:var(--ok);cursor:pointer}
+    .settings-note{font-size:.8rem;color:var(--mut);margin:.35rem 0 0}
+    .settings-status{color:var(--ok);font-size:.82rem;margin-left:.4rem}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div><span class="tag">RELEASE</span><span class="tag">SIGNED BUNDLES</span><span class="tag">TIERS hardcore/core/casual</span><span class="tag">CAMPAIGN A→B→C</span><span class="tag">V21 PAUSE + SETTINGS</span><span class="tag">V20 LIVE LB SUBMIT</span><span class="tag">V19 TOUCH STICK + MOBILE HUD</span><span class="tag">V18 ARENA C RESIDUALS</span><span class="tag">V17 GEOMETRY NAVMESH</span><span class="tag">V16 IN-RUN RETRY</span><span class="tag">V15 ARENA MOODS</span><span class="tag">V14 FIRST-MINUTE COACH</span><span class="tag">WEEKLY CLEAR TIME</span><span class="tag">LOCAL LB</span></div>
+      <h1>Neon Rooftop Dash</h1>
+      <p class="pitch"><strong>V21 — pause menu + settings (basic ship hygiene):</strong> a live game can finally be interrupted cleanly. <strong>Esc</strong> (when the V14 coach is not consuming it), a large on-screen <strong>PAUSE / 暂停</strong> button, or <strong>gamepad Start</strong> opens a bilingual <strong>PAUSED / 已暂停</strong> panel with <strong>Resume / 继续</strong>, <strong>Settings / 设置</strong>, <strong>Retry / 重试</strong> and <strong>Quit / 退出</strong>. Pause is a <code>_paused</code> flag that stops the fixed tick and gates input — it <strong>never touches <code>Engine.time_scale</code></strong>, so a resume continues the same deterministic simulation and replay/StateHash are unaffected. The touch <strong>MoveStick + DASH/EMP/JUMP</strong> pads hide while paused and restore on resume; desktop WASD/abilities still work after resume. <strong>Settings</strong> (from pause <em>or</em> the landing button) exposes <strong>Master / SFX / Music</strong> volume and <strong>touch stick sensitivity 0.5–1.5×</strong>; changes apply immediately and persist in <code>localStorage aigame_settings_v1</code>, which Godot reads on boot. Keyboard WASD is not scaled. Esc priority is documented and tested: coach visible → Esc dismisses the coach; otherwise Esc toggles pause; while paused → Esc backs out of Settings / resumes. <code>PAUSE_SETTINGS_PROOF PASS</code> covers synthetic Esc + gamepad Start, frozen tick/player, resume advance, pad hide/restore, settings persist + re-read, stick sensitivity magnitude, and Retry-from-pause through the V16 path. No AI / HP / wave / navmesh / touch soften: HUNT_FULL stays A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong>.</p>
+      <p class="zh">V21 — 暂停菜单 + 设置（上线级基础体验）：现在可以干净地中断一局。按 <strong>Esc</strong>（教练可见时优先关闭教练）、点大号 <strong>「暂停 / PAUSE」</strong> 按钮，或按手柄 <strong>Start</strong>，会打开中英双语暂停面板：<strong>继续 / Resume</strong>、<strong>设置 / Settings</strong>、<strong>重试 / Retry</strong>、<strong>退出 / Quit</strong>。暂停使用 <code>_paused</code> 标志停住固定 tick 并拦截输入，<strong>绝不修改 <code>Engine.time_scale</code></strong>，因此恢复后继续同一场确定性模拟，回放/StateHash 不受影响。暂停时<strong>触控摇杆与 DASH/EMP/JUMP 会隐藏</strong>，恢复后自动出现；桌面 WASD 与技能操作在恢复后照常可用。<strong>设置</strong>可从暂停面板或落地页按钮打开：<strong>主音量 / 音效 / 音乐</strong>与<strong>触控摇杆灵敏度 0.5–1.5×</strong>，改动立即生效并写入 <code>localStorage aigame_settings_v1</code>，Godot 下次启动读取；键盘 WASD 不受灵敏度影响。Esc 优先级已文档化并测试：教练可见 → Esc 关教练；否则 Esc 开关暂停；暂停中 → Esc 从设置返回 / 继续游戏。<code>PAUSE_SETTINGS_PROOF PASS</code> 覆盖合成 Esc 与手柄 Start、tick/玩家冻结、恢复后继续推进、摇杆隐藏/恢复、设置持久化与回读、灵敏度倍率，以及暂停内重试走 V16 路径。AI/血量/波次/导航/触控均未削弱：HUNT_FULL 仍为 A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong>。</p>
+      <p class="pitch"><strong>V20 — live weekly leaderboard submit (honest source badge):</strong> when you clear the weekly Hardcore Combat <strong>campaign</strong> or a <strong>solo</strong> arena, the board now has a real ops path instead of a snapshot-only dead end. <code>recordAsync()</code> always writes <strong>device localStorage first</strong>; then, <em>only</em> if an L3 bus base is reachable (<code>?bus=https://…</code> / <code>window.AIGAME_BUS_URL</code>) and auth is accepted, it POSTs through the <strong>existing V0 contract</strong> — <code>POST {bus}/bus/v0/call {service:"leaderboard", method:"submit"}</code> with <code>week_id</code>, <code>tier</code>, <code>bundle_id</code> (campaign → featured <code>84123</code>), <code>elapsed_ms</code>/<code>time_s</code>, a stable anon <code>player</code>, and the full campaign flags/chain — then immediately re-reads <code>leaderboard.top</code> so your row appears <strong>without a page reload</strong>. Every board now carries a visible <strong>Live | Device | Snapshot+Device</strong> badge: <strong>Live</strong> is only set by a successful bus top/submit in this page session; a failed, timed-out, offline, CORS-blocked or token-rejected submit <strong>never</strong> shows Live and falls back softly to device + the read-only CDN snapshot. <code>LB_LIVE_SUBMIT_PROOF PASS</code> covers no-bus, mocked success, campaign bucket, 401, timeout, a real local <code>services.server</code> submit→top→persisted-store case, and kill-the-bus FAIL→fallback. <strong>Ops reality:</strong> GitHub Pages is static and cannot host an always-on bus — a Live board for strangers needs an ops-provided <strong>HTTPS bus with CORS + token distribution</strong>; the public Pages build ships <strong>without</strong> a mutating token, so its honest default is <strong>Device + Snapshot</strong>.</p>
+      <p class="zh">V20 — 周榜实时提交（诚实来源徽标）：本周硬核战役<strong>通关</strong>或<strong>单场</strong>通关后，榜单不再只有快照。新增的 <code>recordAsync()</code> <strong>先把成绩写进本机 localStorage</strong>；只有在 L3 总线地址可达（<code>?bus=https://…</code> / <code>window.AIGAME_BUS_URL</code>）且鉴权通过时，才走<strong>既有 V0 契约</strong> <code>POST {bus}/bus/v0/call {service:"leaderboard", method:"submit"}</code>（带 <code>week_id</code>、<code>tier</code>、<code>bundle_id</code>、<code>elapsed_ms</code>/<code>time_s</code>、稳定匿名 <code>player</code> 与完整战役标记/关卡链），随后立刻 <code>leaderboard.top</code> 回读，<strong>无需刷新页面</strong>即可看到自己的名次。所有榜单都显示 <strong>Live | Device | Snapshot+Device</strong> 徽标：<strong>Live</strong> 只会在本次页面会话里总线 top/submit 成功时出现；失败、超时、离线、CORS 被拦或 token 被拒一律<strong>不会</strong>显示 Live，并软回退到本机 + 只读 CDN 快照。<code>LB_LIVE_SUBMIT_PROOF PASS</code> 覆盖无总线、模拟成功、战役归档、401、超时、真实本地 <code>services.server</code> 提交→回读→落盘，以及杀掉总线后的 FAIL→回退。<strong>运维前提：</strong>GitHub Pages 是静态托管，不能当常驻总线——要让陌生人看到 Live，需要运维提供<strong>带 CORS 与 token 分发的 HTTPS 总线</strong>；公开 Pages 构建<strong>不</strong>内置可写 token，因此其诚实默认仍是 <strong>Device + Snapshot</strong>。</p>
+      <p class="pitch"><strong>V19 — touch stick + phone HUD:</strong> the signed campaign now has a real <strong>virtual analog left stick</strong> plus large <strong>DASH</strong>, <strong>EMP / PULSE</strong> and <strong>JUMP</strong> buttons on the right. The pad auto-shows on a phone / coarse pointer / touchscreen, or with <code>?touch=1</code> / <code>FORCE_TOUCH_PAD=1</code>, and hides on a pure keyboard desktop. The stick writes continuous <code>InputFrame.touch_move_x/y</code> in [-1,1] (deadzone 0.15, clamp length ≤1) into the <strong>same mover WASD uses</strong> — no parallel path. <code>TOUCH_UI_PROOF PASS</code> checks the stick + DASH + EMP + JUMP nodes, real <code>InputEventScreenTouch</code> hit-tests, DASH/EMP merge through <code>InputFrame</code>, and that holding the stick moves the real player. The phone HUD is safe-area aware and fits <strong>390×844 portrait</strong> and <strong>844×390 landscape</strong>: ControlLegend, HP/stamina, coach, campaign banner and the fail/retry panel are readable, and Retry/Quit stay <strong>≥56 px</strong> tall; the pad hides behind the retry panel. Desktop keyboard/mouse is unchanged, and HUNT_FULL stays A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong> ticks with no HP/speed/wave/AI change.</p>
+      <p class="zh">V19 — 触控摇杆 + 手机 HUD：签名战役现在有真正的<strong>左侧虚拟模拟摇杆</strong>，右侧是大号 <strong>DASH</strong>、<strong>EMP / PULSE</strong> 与 <strong>JUMP</strong> 按钮。手机 / 粗指针 / 触屏会自动显示，也可用 <code>?touch=1</code> / <code>FORCE_TOUCH_PAD=1</code> 强制；纯键盘桌面保持隐藏。摇杆输出连续的 <code>InputFrame.touch_move_x/y</code>（[-1,1]，死区 0.15，长度 ≤1），走的是<strong>与 WASD 完全相同的移动路径</strong>，没有第二套 mover。<code>TOUCH_UI_PROOF PASS</code> 验证摇杆 + DASH + EMP + JUMP 节点、真实 <code>InputEventScreenTouch</code> 命中、DASH/EMP 经 <code>InputFrame</code> 合并，以及按住摇杆能让真实玩家移动。手机 HUD 适配安全区，<strong>390×844 竖屏</strong>与 <strong>844×390 横屏</strong>均不裁切：ControlLegend、血量/耐力、教练、战役横幅与失败/重试面板可读，Retry/Quit 按钮高度 <strong>≥56 px</strong>；失败/重试面板出现时摇杆隐藏。桌面键鼠完全不变，HUNT_FULL 仍为 A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong> tick，血量/速度/波次/AI 均未削弱。</p>
+      <p class="pitch"><strong>V18 — Arena C residuals closed:</strong> the Core Breach finale (<code>neon_hardcore_combat_84125</code>) now clears the <strong>same CHASE_PINCER bar as A/B</strong> — <code>SMOKE_CHASE_PINCER PASS pincer=1 los_reacquire=2 lunge=2 reacquire=2 latency=6 min_dist=1.64 telegraph=1 fair=1 pretell=1 tell_ticks=16 marker=2</code>. The C-only probe corridor moved to the open north lane because the <strong>intact breakable crates at ±3,11</strong> — not the low vault barriers at ±3,7.5 — were sitting on the dash LOS segment. C also authored six perimeter oak/pine props (<code>TREE_BIND PASS count=6</code>). Hunter HP/speed/waves/contact/EMP and every probe threshold are unchanged; HUNT_FULL stays A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong> and the geometry navmesh is still <code>source=geometry</code>.</p>
+      <p class="zh">V18 — 竞技场 C 遗留项清零：终局·核心突破（84125）现在与 A/B 打同一套夹击门槛——<code>SMOKE_CHASE_PINCER PASS pincer=1 los_reacquire=2 lunge=2 reacquire=2 latency=6 min_dist=1.64 telegraph=1 fair=1 pretell=1 tell_ticks=16 marker=2</code>。C 专用探针走廊移到北侧开阔道，因为挡路的其实是<strong> ±3,11 完好的可破坏木箱</strong>，而不是 ±3,7.5 的低矮掩体。C 还新增 6 棵外围橡树/松树（<code>TREE_BIND PASS count=6</code>）。猎人血量/速度/波次/接触伤害/EMP 与所有探针阈值均未改动；HUNT_FULL 仍为 A <strong>1335</strong> / B <strong>1080</strong> / C <strong>1050</strong>，几何导航仍是 <code>source=geometry</code>。</p>
+      <p class="pitch"><strong>V17 — geometry navmesh for hunters:</strong> each arena now bakes a deterministic walkable grid + portal graph from the <strong>same floor / ramp / lane / cover colliders</strong> LevelBuilder spawns — chase, flank and height no longer depend on hand-authored waypoint strings. Hunters run A* over the baked graph (<code>NAVMESH_BAKE … source=geometry</code> / <code>NAVMESH_PATH used=1</code>), climb ramps to lane tops, route around cover and live breakable debris, and fall back to V1–V4 waypoints only when the graph has no corridor. No HP/speed/wave/EMP change: HUNT_FULL A <strong>1635→1335</strong>, B <strong>1215→1080</strong>, C <strong>2565→1050</strong>; per-arena path smoke proves start → cover/debris → height lane. Pincer/chase, moods, retry, coach, tiers, LB and BundleGate unchanged.</p>
+      <p class="zh">V17 — 猎人的几何导航网格：每个竞技场都会从 LevelBuilder 实际生成的<strong>地板 / 斜坡 / 高台 / 掩体碰撞体</strong>烘焙确定性的可行走网格 + 传送门图；追击、包抄与爬高不再只依赖手写路点。猎人用 A* 走烘焙图（<code>NAVMESH_BAKE … source=geometry</code> / <code>NAVMESH_PATH used=1</code>），能沿斜坡上高台、绕开掩体与实时可破坏碎屑；只有图内无通路时才回退 V1–V4 手写路点。血量/速度/波次/EMP 全不变：HUNT_FULL A <strong>1635→1335</strong>、B <strong>1215→1080</strong>、C <strong>2565→1050</strong>；逐场路径冒烟验证 起点→掩体/碎屑→高台。夹击/追击、氛围、重试、教练、难度、榜单与 BundleGate 不变。</p>
+      <p class="pitch"><strong>V16 — death → one-tap retry:</strong> after a campaign or solo fail (and after a campaign clear), a readable EN+ZH panel offers <strong>Retry / 再试一次</strong>. Campaign retry rebuilds signed <strong>Stage 1 (84123) + cyan mood</strong> in-run with full HP/stamina and <strong>no page reload</strong>; solo retry restarts the <strong>same arena</strong>. <strong>KEY_R</strong> aliases the same path; <strong>Quit / 返回首页</strong> is the only control that leaves for <code>landing.html</code>. Coach, tiers, HP carry, moods, LB and BundleGate unchanged.</p>
+      <p class="zh">V16 — 死亡 → 一键重试：战役或单打失败后（战役通关也一样），可读的中英面板提供<strong>「重试 / RETRY」</strong>。战役重试在局内重建签名<strong>第一阶段（84123）+ 青色氛围</strong>，满血满耐力、<strong>不刷新页面</strong>；单打重试重开<strong>同一竞技场</strong>。<strong>KEY_R</strong> 走同一路径；<strong>「退出 / 返回首页」</strong>是唯一离开游戏回到 <code>landing.html</code> 的按钮。教练、难度、跨阶段血量、氛围、榜单与 BundleGate 均不变。</p>
+      <p class="pitch"><strong>V15 — three arenas, three moods:</strong> every signed campaign stage now ships its own <strong>WorldEnvironment + mood-tinted backdrop + fog + key light</strong>, re-applied on each in-run hop so Stage C never inherits Stage A lighting. <strong>A · Rooftop Hunt 84123</strong> cool cyan night; <strong>B · Alley Pincer 84124</strong> warmer magenta/amber with tighter fog; <strong>C · Core Breach 84125</strong> cold green/white reactor glow with stronger bloom. Combat stays readable: ambient stays up (no murky black), and hunter HP/speed, tiers, HP carry and LB schema are untouched. Signed <code>dsh_env_*</code> keys; missing keys fall back to the cyan baseline.</p>
+      <p class="zh">V15 — 三个竞技场，三种氛围：每个签名战役阶段现在都有自己的 <strong>WorldEnvironment + 氛围背景色 + 雾 + 主光</strong>，并在战役内换关时重新应用，C 阶段不会再继承 A 阶段的光照。<strong>A · 屋顶狩猎 84123</strong> 冷青夜色；<strong>B · 巷战夹击 84124</strong> 更暖的品红/琥珀与更紧的雾；<strong>C · 核心突破 84125</strong> 冷绿/白反应堆辉光与更强泛光。战斗可读性优先：环境光不压黑；猎人血量/速度、难度、跨阶段血量与榜单结构全部不变。使用签名 <code>dsh_env_*</code> 键；缺键时回退到青色基线。</p>
+      <p class="pitch"><strong>V14 — first 60s campaign onboarding:</strong> on Campaign start (Stage 1 Rooftop Hunt), a dismissable EN+ZH <strong>first-minute coach</strong> sequences five tips — <strong>move</strong> (WASD / D-pad), <strong>DASH i-frames</strong> (K / Shift · touch DASH), <strong>PULSE → EMP</strong> (4-hit chain), <strong>HP carries</strong> between stages, and the <strong>three-stage route</strong> (clear hunters → Stage 2 alley → Stage 3 core). Skip with Esc / click / Skip; seen once via <code>aigame_coach_v14_seen</code>; harness <code>?coach=0</code> / headless skips. Stage 1 intro banner now carries the objective line. A compact <strong>ControlLegend</strong> HUD strip shows DASH + PULSE (+ touch when the pad is up). Gameplay numbers, tiers, bus LB, BundleGate unchanged.</p>
+      <p class="zh">V14 — 战役开场约 60 秒新手引导：战役 Stage 1 屋顶狩猎启动时，可关闭的中英<strong>首分钟教练</strong>依次提示——<strong>移动</strong>（WASD / 触控方向）、<strong>DASH 无敌帧</strong>（K / Shift · 触控 DASH）、<strong>PULSE→EMP</strong>（4 连）、<strong>生命值跨阶段保留</strong>、以及<strong>三阶段路线</strong>（清空猎人 → 第二阶段巷战 → 第三阶段核心）。Esc / 点击 / Skip 可跳过；<code>aigame_coach_v14_seen</code> 只出现一次；<code>?coach=0</code> / headless 跳过。第一阶段横幅补上目标句。HUD <strong>ControlLegend</strong> 条显示 DASH + PULSE（触控板可见时加 touch）。玩法数值、难度档、总线榜、BundleGate 不变。</p>
+      <p class="pitch"><strong>V12 — choose a tier, then race the campaign clock:</strong> the same signed <strong>three-stage run (A→B→C)</strong> now runs at <strong>Hardcore / Core / Casual</strong>, and a campaign clear writes its <strong>total time + tier</strong> to this week’s leaderboard. <strong>Hardcore is the V11 product, unchanged</strong>: 100 HP, 8/8/11 hunters, 16 contact damage, 42 stamina, 4-hit PULSE → 2.2 s EMP window, same hunter HP/speed. <strong>Core</strong> is softer on the player side (120 HP, contact 12 / 1.1 s, stamina 34, same 4-hit PULSE → 2.8 s EMP window / ×1.5 radius). <strong>Casual</strong> is softer still (150 HP, contact 9 / 1.3 s, stamina 28, 4-hit PULSE → 3.4 s EMP / ×1.6). Hunter HP and speed stay at the V11 values on every tier so authored pathing/telegraphs stay honest. Clear <strong>Rooftop Hunt 84123</strong> → <strong>Alley Pincer 84124</strong> → <strong>FINALE Core Breach 84125</strong> (11 hunters / 3 elites, <strong>CORE SURGE / CORE BREACH</strong>); HP carries between stages (<strong>生命值跨阶段保留</strong>), and only C can end the campaign. The finale clear time (ticks + seconds + tier + 3/3 + bundle chain) is submitted to the week LB and read back on this page.</p>
+      <p class="zh">V12 — 先选难度，再冲战役计时：同一条签名<strong>三阶段连打（A→B→C）</strong>现在支持<strong>硬核 / 核心 / 休闲</strong>，战役通关会把<strong>总用时 + 难度</strong>写入本周排行榜。<strong>硬核 = V11 原样</strong>：100 血、8/8/11 名猎人、接触伤害 16、耐力 42、4 连 PULSE → 2.2 秒 EMP 窗口，猎人血量/速度完全不变。<strong>核心</strong>更软（玩家侧：120 血、接触 12/1.1 秒、耐力 34、4 连 PULSE → 2.8 秒 EMP 窗 / ×1.5 半径）。<strong>休闲</strong>最软（150 血、接触 9/1.3 秒、耐力 28、4 连 PULSE → 3.4 秒 EMP / ×1.6）。各难度猎人血量与速度均保持 V11，以保证手写路径/预警时序诚实。清空<strong>屋顶狩猎 84123</strong> → <strong>巷战夹击 84124</strong> → <strong>终局 · 核心突破 84125</strong>（11 名猎人 / 3 名精英，<strong>CORE SURGE / CORE BREACH / 核心涌动 / 核心突破</strong>）；<strong>生命值跨阶段保留</strong>，只有清空 C 才算通关。终局用时（tick + 秒 + 难度 + 3/3 + 关卡链）会写入本周榜并回读显示在本页。</p>
+      <h2>Tier / 难度</h2>
+      <p class="muted"><strong>Campaign · 战役三连</strong> — same A→B→C chain; hardcore is the default weekly tier.</p>
+      <p>
+        <a class="btn" data-tier-link="hardcore" href="./index.html?bundle=neon_hardcore_combat_84123&campaign=1&weekly=1&week=2026-W44&tier=hardcore" id="play-campaign">Campaign · HARDCORE 硬核 (V11 · default)</a>
+        <a class="btn secondary" data-tier-link="core" href="./index.html?bundle=neon_hardcore_combat_84123&campaign=1&weekly=1&week=2026-W44&tier=core" id="play-campaign-core">Campaign · CORE 核心 (softer)</a>
+        <a class="btn secondary" data-tier-link="casual" href="./index.html?bundle=neon_hardcore_combat_84123&campaign=1&weekly=1&week=2026-W44&tier=casual" id="play-campaign-casual">Campaign · CASUAL 休闲 (softest)</a>
+      </p>
+      <p><a class="btn secondary" href="./index.html?bundle=neon_hardcore_combat_84123&campaign=0&weekly=1&week=2026-W44&tier=hardcore&touch=1" id="play-touch">Phone / 手机触控试玩 · stick + DASH/EMP (touch=1)</a>
+        <button type="button" class="btn secondary" id="settings-open" aria-expanded="false" aria-controls="settings-card">Settings / 设置 · volumes + stick</button>
+      </p>
+
+      <section class="card" id="settings-card" hidden style="margin:.6rem 0 .9rem">
+        <h2 style="margin-top:0">Settings / 设置 <span class="tag">aigame_settings_v1</span><span class="tag">saved on this device</span></h2>
+        <p class="muted">Shared with the in-game pause menu: the same <code>aigame_settings_v1</code> localStorage object is read by Godot on boot. Sliders apply immediately; keyboard WASD is unaffected by stick sensitivity.</p>
+        <div class="settings-grid">
+          <div class="setting"><label for="set-master"><strong>MASTER VOLUME / 主音量</strong><output id="set-master-val">100%</output></label><input id="set-master" type="range" min="0" max="100" step="1" value="100"></div>
+          <div class="setting"><label for="set-sfx"><strong>SFX VOLUME / 音效音量</strong><output id="set-sfx-val">100%</output></label><input id="set-sfx" type="range" min="0" max="100" step="1" value="100"></div>
+          <div class="setting"><label for="set-music"><strong>MUSIC / AMBIENCE / 音乐音量</strong><output id="set-music-val">100%</output></label><input id="set-music" type="range" min="0" max="100" step="1" value="100"></div>
+          <div class="setting"><label for="set-stick"><strong>STICK / 摇杆灵敏度</strong><output id="set-stick-val">100% (×1.00)</output></label><input id="set-stick" type="range" min="50" max="150" step="1" value="100"></div>
+        </div>
+        <p class="settings-note">Pause in game: <code>Esc</code> / <code>gamepad Start</code> / the on-screen <strong>PAUSE</strong> button. <span class="settings-status" id="settings-status">Loaded / 已读取</span></p>
+        <p><button type="button" class="btn secondary" id="settings-close">Close / 关闭</button></p>
+      </section>
+      <p class="muted"><label for="tier-select">Solo tier / 单打难度：</label>
+        <select id="tier-select" style="background:#0b1020;color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:.35rem .5rem;font:inherit">
+          <option value="hardcore" selected>HARDCORE 硬核 (V11)</option>
+          <option value="core">CORE 核心</option>
+          <option value="casual">CASUAL 休闲</option>
+        </select>
+        <span class="ops">A/B/C links below honor this tier; campaign buttons above are explicit.</span>
+      </p>
+      <p>
+        <a class="btn secondary" data-solo-tier="1" href="./index.html?bundle=neon_hardcore_combat_84123&weekly=1&week=2026-W44&campaign=0&tier=hardcore" id="play-hardcore-combat">Arena A · Rooftop Hunt 屋顶狩猎 (84123 · W44 weekly)</a>
+        <a class="btn secondary" data-solo-tier="1" href="./index.html?bundle=neon_hardcore_combat_84124&campaign=0&tier=hardcore" id="play-arena-b">Arena B · Alley Pincer 巷战夹击 (84124)</a>
+        <a class="btn secondary" data-solo-tier="1" href="./index.html?bundle=neon_hardcore_combat_84125&campaign=0&tier=hardcore" id="play-arena-c">Arena C · Core Breach 核心突破 · FINALE (84125)</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_84021" id="play-classic">Play Classic</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_84022" id="play-cp">Play Checkpoint Run</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_84023" id="play-hardcore-night">Play Hardcore Night</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_monster" id="play-neon-monster">Neon + Monster</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_mech" id="play-neon-mech">Neon + Mech</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_wolf" id="play-neon-wolf">Neon + Wolf</a>
+      </p>
+      <p class="muted">Direct play URLs: <code>index.html?bundle=neon_hardcore_combat_84123&amp;campaign=1&amp;weekly=1&amp;week=2026-W44&amp;tier=hardcore</code> (Campaign A→B→C · 挑战战役; swap <code>tier=core|casual</code>) · <code>index.html?bundle=neon_hardcore_combat_84123&amp;weekly=1&amp;week=2026-W44&amp;campaign=0&amp;tier=hardcore</code> (Arena A solo · 屋顶狩猎) · <code>index.html?bundle=neon_hardcore_combat_84124&amp;campaign=0&amp;tier=core</code> (Arena B solo · 巷战夹击) · <code>index.html?bundle=neon_hardcore_combat_84125&amp;campaign=0&amp;tier=casual</code> (Arena C solo · FINALE 核心突破). <code>campaign=0</code> is an explicit solo entry that clears any stored campaign flag and always starts at full HP; campaign win only after C; weekly default stays <strong>84123 / 2026-W44 / hardcore</strong>. EN+ZH labels above. Add <code>&amp;touch=1</code> to force the on-screen stick + DASH/EMP on any desktop browser; on a real phone the pad auto-shows.</p>
+      <p class="muted ops">Neon main modes now use animatable avatars (Fox/Human) — helps playtest funnel vs capsule-only.</p>
+      <p class="muted ops">Hardcore Combat <strong>V12</strong> = V11’s signed A→B→C campaign plus <strong>runtime tiers</strong> and a <strong>campaign clear-time weekly row</strong>. Tier is resolved from <code>?tier=</code> (env <code>SMOKE_TIER</code> for headless proof), defaults to <strong>hardcore</strong>, persists via <code>localStorage aigame_tier_v1</code>, and is re-applied after every in-run stage rebuild. <strong>hardcore = identity</strong> (no delta: 100 HP, hunter HP 2/2/3, contact 16, stamina 42, PULSE need 4 / 2200 ms / EMP 2 dmg / 1.0 s / ×1.4 radius). <strong>core</strong>: 120 HP, contact 12 / 1.1 s, stamina 34 / regen 20 s / 500 ms, PULSE need 4 / 2800 ms / EMP radius ×1.5 (hunter HP/speed unchanged vs V11). <strong>casual</strong>: 150 HP, contact 9 / 1.3 s, stamina 28 / 26 s / 350 ms, PULSE need 4 / 3400 ms / EMP radius ×1.6 (hunter HP/speed unchanged). Softness is player HP/contact/stamina/EMP window+radius only; hunter HP and speed stay V11 at every tier so authored pathing/telegraph timing stays tuned. The campaign chain still lives in signed gamespecs: <code>dsh_campaign_total_stages=3</code>, A <code>next=84124</code>, B <code>next=84125</code>; each hop BundleGates and rebuilds <strong>in-run</strong>; HP is stashed before purge and restored after boot. <code>_finish</code> intercepts stages 1/2, so only C can win. On <code>CAMPAIGN_WIN</code> the runtime writes <code>campaign=true, campaign_win=true, tier, campaign_total_ticks, campaign_total_sec, campaign_total_ms, campaign_stage_ticks[3], campaign_stage=3, campaign_stages=3, bundle_chain</code> to <code>aigame_neon_lb_week_v1:&lt;week&gt;</code> via <code>AIGAME_LEADERBOARD.record</code>, then reads it back with <code>bestCampaign()</code> (<code>LB_CAMPAIGN_WRITE</code> / <code>LB_CAMPAIGN_READBACK</code>). <strong>V17 navmesh solo</strong>: 84123 HUNT_FULL <code>tick=1335</code> (was 1635), 84124 <code>tick=1080</code> (was 1215), 84125 <code>tick=1050</code> (was 2565) — faster pathing, no HP/speed/wave change. <strong>V18 Arena C residuals</strong>: C <code>SMOKE_CHASE_PINCER</code> now PASS at the A/B bar (probe corridor moved to the open north lane; the intact breakables at ±3,11 were the LOS blocker) and C <code>TREE_BIND PASS count=6</code> from six authored perimeter props. Classic T05/OPT_E untouched. <strong>V19 touch/mobile HUD</strong>: analog stick + DASH/EMP/JUMP, ?touch=1, phone-safe 390x844 / 844x390 layout, TOUCH_UI_PROOF PASS; desktop unchanged.</p>
+      <p class="muted ops">Hardcore Combat is touch-playable on phone: V19 analog left stick + DASH / EMP(PULSE) / JUMP; <code>?touch=1</code> forces it on desktop for QA. Fail/retry hides the pad and keeps ≥56 px Retry/Quit targets.</p>
+      <p class="muted"><strong>Controls:</strong> WASD / arrows · Space jump · R restart · <code>K</code>/<code>Shift</code> DASH · <code>J</code> PULSE→EMP · <code>Esc</code> / gamepad Start / on-screen PAUSE = pause menu (Resume / Settings / Retry / Quit) · on mobile push the left stick to move and tap DASH / EMP / JUMP · desktop: click the canvas first for keyboard focus</p>
+      <h2>What “good” looks like (3 min)</h2>
+      <ul class="muted">
+        <li>Classic loads without a Godot editor; HUD shows title + GO.</li>
+        <li>You can move, jump, reach the green pad → <em>Clear!</em> — or time out → lose copy.</li>
+        <li>Checkpoint Run shows progress <code>cp=N/M</code>; restart with R works.</li>
+        <li>Hardcore Night (84023): tighter 55s clock, denser obstacles, <code>cp</code> ≥1 required.</li>
+        <li>Hardcore Combat <strong>V11 campaign</strong> (<code>?campaign=1</code>): clear Rooftop Hunt → <strong>Stage 2 · 巷战夹击</strong> banner + transition sting → Alley Pincer loads in the same run → clear B → <strong>Stage 3 · 终局核心突破</strong> banner → Core Breach loads → clear C → <strong>CAMPAIGN CLEAR / 战役通关 · 3/3</strong>. <strong>HP carries</strong>: the HUD shows <code>HP CARRIES BETWEEN STAGES / 生命值跨阶段保留</code> and the stashed value is restored into B and C; dying on any stage ends the attempt. Campaign win is gated on C; A or B alone only advance. Solo A (W44 weekly), solo B and solo C one-clicks are unchanged, start at full HP and do not force the campaign.</li>
+        <li>Hardcore Combat <strong>V11 finale</strong> (<code>neon_hardcore_combat_84125</code> · Core Breach / 核心突破): a <strong>tighter 36 m reactor chamber</strong> with one raised 8×6 m core gantry (2 ramps + 1 drop lane), 12 authored cover boxes (8 tall containment walls) + 4 breakables + 2 low vault barriers; <strong>11 hunters vs 8</strong> in A/B, with <strong>3 elite guards</strong> in wave 3, unique <code>CORE SURGE / 核心涌动</code> and <code>CORE BREACH / 核心突破</code> telegraphs and <code>FINALE — CORE BREACH / 终局 · 核心突破</code> win copy. Hunter HP/speed/contact/EMP/stamina/dash/pincer-fair/debris/juice/anim/mix are carried from V8/V9 byte-identical (no soften); the climax is space + elite density. Solo C one-click starts at full HP; campaign C starts with the carried HP.</li>
+        <li>Hardcore Combat <strong>V9 second arena</strong> (<code>neon_hardcore_combat_84124</code> · Alley Pincer / 巷战夹击): twin 1.8 m pads (8×10 m each) over a two-lane alley, 8 tall wall sections + 4 vaultable low barriers + 2 mid pillars, 4 ramps / 2 lanes / 13 nav edges; authored footprint <strong>239.8 m² vs 113.8 m²</strong> on 84123; same 3 waves / 8 hunters, HP/speed/EMP/stamina unchanged; <code>SMOKE_HUNT_FULL PASS tick=1080</code> (V17 navmesh; V9 was 1215), <code>SMOKE_AI_NAV PASS peak_y=1.82</code>, <code>SMOKE_CHASE_PINCER fair=1 pretell=1</code>, debris/anim/juice/sfx green. Both arenas one click from this page.</li>
+        <li>Hardcore Combat <strong>V8 rooftop</strong> (<code>neon_hardcore_combat_84123</code> · still the W44 weekly and unchanged): eliminate 3 waves / 8 hunters + hazards; Fox avatar; hunters <strong>flank</strong>, <strong>skirt cover on the same side</strong>, climb <strong>two raised routes</strong>, <strong>descend/drop</strong> when you leave height, and <strong>cross the platform through the ramp portal</strong>; dual hunters now give an <strong>earlier bracket pre-tell + partner ring + dedicated HUD strip</strong> before the same V6 pincer commit (delay 16 / hold 38 unchanged), and after DASH the primary <strong>LOS-reacquires and lunges</strong>; the <strong>mech attacks</strong> with <code>DSH_Attack_v2</code> + a shoulder piston and the <strong>spider runs</strong> on <code>DSH_Run_v2</code>; taking damage adds a <strong>camera hit-punch</strong> and HP 0 adds a <strong>death pull-back cam</strong>; DASH (K/Shift) i-frames cost hard stamina; 4 PULSE hits → <strong>EMP stun</strong>; <strong>4 breakable crates</strong> burst into <strong>5 ballistic fragments + dust</strong> while leaving the <strong>solid lane-block</strong>; <strong>combat-forward phone mix</strong> (footsteps duck under EMP/hit) + a mid-wave <strong>SURGE</strong> flash; bilingual win/death juice.</li>
+        <li>AI-made Crystal Skyline (84031): AI Spec→compile→sign with <code>avatar_opt</code> Fox Walk; BundleGate + ASSET_BIND PASS.</li>
+        <li>AI Spec Hardcore Wave2 (<code>aispec_hardcore_wave2_84150</code>): hand aispec → compiler emits <code>dsh_wave2_*</code> + Wolf <code>avatar_opt</code>; CEILING_BOOT wave1+wave2 PASS. Weekly still 84123.</li>
+        <li>DSH ceiling hunt (T04): Fox vs android hunters — combat opt-in via <code>dsh_ceiling_v1</code>; BundleGate PASS. Combat stays opt-in (not on Classic).</li>
+        <li>Neon main modes bind animatable library avatars (Classic=Fox, Checkpoint=Human, Hardcore=Fox) + oak+pine props (84123/84021). Monster/Mech Neon switches below. Avatar demos still available.</li>
+        <li>Tamper check: <a href="./index.html?bundle=tampered">?bundle=tampered</a> → BUNDLE REJECTED.</li>
+      </ul>
+      <p class="muted">Unsigned / tampered packs are rejected on this release build (<code>aigame_release</code>).</p>
+    </div>
+
+
+
+    
+    <div class="card gallery-card" id="avatar-gallery">
+      <div><span class="tag">CAPABILITY</span><span class="tag">ANIMATABLE GLB</span><span class="tag">SHARE</span></div>
+      <h2 style="margin-top:.5rem">Avatar capability gallery</h2>
+      <p class="gallery-share"><strong>Share line:</strong> This platform binds <em>animatable library GLBs</em> (Walk/Run on move) — not colored block placeholders. Tap a mesh → 30s proof.</p>
+      <p class="zh">分享句：平台绑定可动画库 GLB（移动播 Walk/Run），不是色块占位。点一个形象 → 30 秒验证。</p>
+      <div class="gallery-grid" role="list">
+        <a class="gallery-tile" role="listitem" href="./index.html?bundle=avatar_fox_demo" id="play-avatar-fox">
+          <strong>Fox</strong>
+          <span>Khronos Fox · Walk/Run/Survey · <code>lib.avatar.fox_khronos_v0</code></span>
+        </a>
+        <a class="gallery-tile" role="listitem" href="./index.html?bundle=avatar_wolf_demo" id="play-avatar-wolf">
+          <strong>Wolf</strong>
+          <span>Quaternius · Walk/Gallop/Idle · <code>lib.avatar.wolf_quaternius_v0</code> · CC0</span>
+        </a>
+        <a class="gallery-tile" role="listitem" href="./index.html?bundle=avatar_human_demo" id="play-avatar-human">
+          <strong>Human</strong>
+          <span>CesiumMan · Animation · <code>lib.avatar.cesium_man_v0</code></span>
+        </a>
+        <a class="gallery-tile" role="listitem" href="./index.html?bundle=avatar_monster_demo" id="play-avatar-monster">
+          <strong>Monster spider</strong>
+          <span>Spider Walk · <code>lib.avatar.monster_spider_v0</code></span>
+        </a>
+        <a class="gallery-tile" role="listitem" href="./index.html?bundle=avatar_mech_demo" id="play-avatar-mech">
+          <strong>Mech BrainStem</strong>
+          <span>BrainStem · <code>lib.avatar.mech_brainstem_v0</code></span>
+        </a>
+      </div>
+      <p class="muted ops" style="margin:.2rem 0 .55rem">Full Neon rooftop with the same binder (optional):</p>
+      <p>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_monster" id="play-neon-monster-gallery">Neon + Monster</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_mech" id="play-neon-mech-gallery">Neon + Mech</a>
+        <a class="btn secondary" href="./index.html?bundle=neon_rooftop_avatar_wolf" id="play-neon-wolf-gallery">Neon + Wolf</a>
+        <a class="btn secondary" href="./index.html?bundle=aispec_avatar_fox_84095" id="play-aispec-avatar-fox">AI Spec→Fox</a>
+        <a class="btn secondary" href="./index.html?bundle=aispec_hardcore_wave2_84150" id="play-aispec-hardcore-wave2">AI Spec→Wave2 Wolf</a>
+        <a class="btn secondary" href="./bundles_index.json">bundles_index</a>
+      </p>
+      <p class="muted ops" style="margin:.15rem 0 .4rem"><strong>Trees:</strong> Kenney CC0 oak + pine · procedural <code>tree_sway</code> · <a href="./index.html?bundle=dev_env_trees" id="play-env-trees">Env Trees demo</a> (<code>lib.prop.tree_oak_v0</code> / <code>lib.prop.tree_pine_v0</code>). Hardcore Combat 84123 + Neon 84021 bind oak+pine deco (non-colliding; REPLAY hash kept); aispec oaks.</p>
+      <p class="ai-note">Binder: GameSpec <code>avatar_opt.fallback_library_id</code> → AssetBinder (capsule hidden). Neon Classic/Checkpoint/Hardcore keep Fox/Human; Hardcore Combat + weekly CTA unchanged above.</p>
+    </div>
+    <!-- legacy anchor for old links -->
+    <div id="avatar-demo" hidden aria-hidden="true"></div>
+
+<div class="card ai-card" id="ai-created">
+      <div><span class="tag">PLATFORM</span><span class="tag">AI SPEC</span><span class="tag">NL→PUBLISH</span></div>
+      <h2 style="margin-top:.5rem">AI-made: Crystal Skyline Dash</h2>
+      <p class="pitch"><strong>Differentiator:</strong> AI Spec → GameSpec compiler → sign → publish (same BundleGate as Neon). This refresh adds compiler-emitted <code>avatar_opt</code> (Fox Walk) — the creation loop can ship animatable avatars, not capsules only.</p>
+      <p class="zh">差异化：AI Spec → 编译签名发布；本刷新经编译器写入可动画 Fox 形象（非胶囊）。</p>
+      <p class="ai-note">Casual · 60s · crystal ledges · Fox <code>lib.avatar.fox_khronos_v0</code> · seed <code>84031</code> · bundle <code>crystal_skyline_dash_84031</code>. Hand aispec (no live DSH this ship). Soft-ops Neon modes stay featured; this proves the <em>creation + avatar</em> loop.</p>
+      <p>
+        <a class="btn" href="./index.html?bundle=crystal_skyline_dash_84031" id="play-ai-crystal">Play AI-made: Crystal Skyline Dash</a>
+        <a class="btn secondary" href="./bundles_index.json">bundles_index</a>
+      </p>
+      <p class="ai-note" style="margin-top:.75rem">AI fallback · Hardcore · 75s · ember alley · Human <code>lib.avatar.cesium_man_v0</code> · seed <code>84032</code> · bundle <code>ember_alley_sprint_84032</code>. Hand aispec → compiler (no live DSH). Same BundleGate as Crystal.</p>
+      <p>
+        <a class="btn secondary" href="./index.html?bundle=ember_alley_sprint_84032" id="play-ai-ember">Play AI fallback: Ember Alley Sprint</a>
+      </p>
+      <p class="ai-note" style="margin-top:.75rem"><strong>AI Spec→compiler wave2 proof</strong> · Hardcore · Wolf avatar · seed <code>84150</code> · bundle <code>aispec_hardcore_wave2_84150</code>. Hand aispec only — <code>combat.wave2_*</code> → compiler <code>dsh_wave2_*</code> + <code>avatar_opt</code> wolf (no hand-edited GameSpec). Same BundleGate; weekly <code>84123</code> unchanged.</p>
+      <p>
+        <a class="btn" href="./index.html?bundle=aispec_hardcore_wave2_84150" id="play-ai-wave2-wolf">Play AI Spec: Hardcore Wave2 Wolf</a>
+      </p>
+    </div>
+
+    
+    <div class="card" id="dsh-ceiling-hunt">
+      <div><span class="tag">DSH</span><span class="tag">CEILING</span><span class="tag">COMBAT</span></div>
+      <h2 style="margin-top:.5rem">DSH hunt (ceiling)</h2>
+      <p class="pitch"><strong>What it is:</strong> DeepSeek-Flash authored combat hunt — Fox avatar, CesiumMan hunters, hazard zones, PULSE attack, kill-gated extraction. Opt-in only when this bundle loads (<code>layout.params.dsh_ceiling_v1</code>); Neon Classic / Checkpoint / Hardcore / Weekly / AI-made / Avatar demos stay unchanged.</p>
+      <p class="zh">DeepSeek-Flash 高压试炼产物：可动狐狸 + 安卓猎人 + 危险区 + PULSE。仅本包启用战斗切片；默认 Neon 关卡不受影响。</p>
+      <p class="ai-note">Bundle <code>dsh_ceiling_hunt_T04</code> · hardcore · 75s · seed <code>84104</code> · NL→AI Spec <code>source=dsh</code> · soft_pos portable bar. Controls: WASD/Space or D-pad+JUMP; attack = pulse / click near foe.</p>
+      <p>
+        <a class="btn" href="./index.html?bundle=dsh_ceiling_hunt_T04" id="play-dsh-hunt">DSH hunt (ceiling)</a>
+        <a class="btn secondary" href="./bundles_index.json">bundles_index</a>
+      </p>
+    </div>
+
+<div class="card weekly-card" id="weekly-challenge">
+      <div><span class="tag">OPS</span><span class="tag">WEEKLY</span><span class="tag">ASIA/SHANGHAI</span></div>
+      <h2 style="margin-top:.5rem">本周挑战 / This week’s challenge</h2>
+      <p class="weekly-meta">Week <strong id="weekly-id">…</strong> · <span id="weekly-range">…</span></p>
+      <p><strong id="weekly-title">Loading…</strong></p>
+      <p class="muted" id="weekly-goal"></p>
+      <p class="zh" id="weekly-goal-zh"></p>
+      <p class="weekly-meta">Shared challenge id: <span class="weekly-seed" id="weekly-seed">—</span> (V0 ops label; signed layout unchanged)</p>
+      <p>
+        <a class="btn" id="play-weekly" href="./index.html?bundle=neon_hardcore_combat_84123&weekly=1&week=2026-W44">Play this week’s challenge</a>
+        <a class="btn secondary" href="./weekly.json">weekly.json</a>
+        <button type="button" class="btn secondary" id="share-copy">Copy share text</button>
+        <a class="btn secondary" id="share-intent-open" href="./SHARE_INTENT.md" target="_blank" rel="noopener">Open share intent</a>
+      </p>
+      <p class="muted ops" id="share-hint">EN: this week’s Hardcore Combat (Fox hunt) → play + Issue. ZH: 本周 Hardcore Combat（Fox 猎人关）试玩后请开反馈 Issue. Copy/Open builds both + weekly URL. Local only — does not auto-post.</p>
+      <h3 style="margin:1rem 0 .4rem;font-size:1rem">本周榜 / This week top times <span class="lb-source" id="lb-week-source" data-source="device" title="Board source: Live bus, device localStorage, or read-only CDN snapshot">Device</span> <span class="tag" id="lb-week-mode-tag">Hardcore Combat</span></h3>
+      <p class="lb-source-note" id="lb-source-note">Source: <span class="lb-src-device">Device</span> — live bus not configured. Add <code>?bus=</code> + ops token to try a live submit; default public Pages stays device + read-only snapshot.</p>
+      <p class="muted ops" id="lb-week-label">Week <strong>2026-W44</strong> · featured <code>neon_hardcore_combat_84123</code> (Hardcore Combat — Weekly Hunt). Device localStorage + read-only bus snapshot when present; empty is honest — no fabricated scores.</p>
+      <p class="muted ops">Week-scoped <code>localStorage</code> key <code>aigame_neon_lb_week_v1:&lt;week&gt;</code> (same ISO week as above). Optional static <a href="./bus_leaderboard_snapshot.json"><code>bus_leaderboard_snapshot.json</code></a> (L3 bus export). Live <code>?bus=</code> still optional. <strong>V13:</strong> campaign clears also POST to the shared bus into the featured weekly bucket (<code>84123</code>), with the finale <code>84125</code> + bundle chain kept as metadata; shared rows are labeled on the boards. <strong>V14:</strong> first-minute coach + Stage 1 objective + ControlLegend — no LB schema change. <strong>V20 live submit:</strong> with an ops bus (<code>?bus=</code>) a clear POSTs <code>leaderboard.submit</code> and repaints this board from <code>leaderboard.top</code>, showing <strong>Live</strong>; without one — or on any failure/timeout/401/CORS — it stays <strong>Device</strong> or <strong>Snapshot+Device</strong>. GitHub Pages cannot host the bus; operators must run an HTTPS bus with CORS and a token story.</p>
+      <table>
+        <thead><tr><th>#</th><th>Result</th><th>Time</th><th>Bundle</th><th>When</th></tr></thead>
+        <tbody id="lb-week-body"><tr><td colspan="5" class="muted">No Hardcore Combat week scores on this device or shared snapshot yet (2026-W44) — play <code>?bundle=neon_hardcore_combat_84123&amp;weekly=1&amp;week=2026-W44</code>. Empty is honest.</td></tr></tbody>
+      </table>
+      <h3 style="margin:1rem 0 .4rem;font-size:1rem">战役最佳 / Best campaign clear <span class="lb-source" id="lb-campaign-source" data-source="device" title="Board source: Live bus, device localStorage, or read-only CDN snapshot">Device</span> <span class="tag">total time</span> <span class="tag" id="lb-campaign-tag">tier</span></h3>
+      <p class="muted ops" id="lb-campaign-best">No campaign clear on this device or shared bus snapshot for <strong>2026-W44</strong> yet — play Campaign (A→B→C) and finish Core Breach. Empty is honest; no fabricated clear time.</p>
+      <table id="lb-campaign-table" hidden>
+        <thead><tr><th>#</th><th>Tier</th><th>Clear time</th><th>Ticks</th><th>Stage</th><th>Bundle chain</th></tr></thead>
+        <tbody id="lb-campaign-body"></tbody>
+      </table>
+      <p class="muted ops" id="bus-lb-status" hidden>Bus LB: …</p>
+      <table id="bus-lb-table" hidden>
+        <thead><tr><th>#</th><th>Result</th><th>Time</th><th>Bundle</th><th>When</th></tr></thead>
+        <tbody id="lb-bus-body"><tr><td colspan="5" class="muted">—</td></tr></tbody>
+      </table>
+      <p class="muted ops">Rotates by ISO week (Mon–Sun, Asia/Shanghai). Same week id for all players. Layout uses the signed featured bundle (BundleGate). Leave feedback after a run.</p>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Device leaderboard <span class="tag">localStorage</span></h2>
+      <p class="muted ops">Optional L3 bus: add <code>?bus=http://127.0.0.1:8787</code> to mirror submits / show stub top. Default = device + static shared snapshot (Pages offline-safe). HTTPS Pages cannot call HTTP localhost (mixed content) — use local static host for E2E.</p>
+      <p class="muted ops">All-time scores on <em>this browser</em> (key <code>aigame_neon_lb_v1</code>). Weekly runs also land in the week card above. The shared bus snapshot is read-only on Pages (no live backend); export does not count as stranger playtest N.</p>
+      <table>
+        <thead><tr><th>#</th><th>Result</th><th>Time</th><th>Bundle</th><th>When</th></tr></thead>
+        <tbody id="lb-body"><tr><td colspan="5" class="muted">No scores yet — play a match first.</td></tr></tbody>
+      </table>
+      <p>
+        <button type="button" class="btn secondary" id="lb-export">Export JSON</button>
+        <button type="button" class="btn secondary" id="lb-import">Import JSON</button>
+        <button type="button" class="btn secondary" id="lb-clear">Clear device LB</button>
+      </p>
+      <textarea id="lb-io" placeholder='Paste exported leaderboard JSON here, then Import…'></textarea>
+      <p class="muted ops" id="telem-hint">Telemetry mode: …</p>
+    </div>
+
+
+    <div class="card" id="playtest-feedback">
+      <p class="pitch"><strong>Playtest CTA:</strong> Play <em>Hardcore Combat</em> (or this week’s challenge), note whether the Fox/Human avatar walked, then open the Issue below — helps G-FINAL (real strangers only; N not faked).</p>
+      <h2 style="margin-top:0">试玩反馈 / Playtest feedback <span class="tag">1–2 min</span></h2>
+      <p class="zh">玩完随便回几句就行（陌生人试玩才能推进上线运营）。手机可点屏幕方向键 + JUMP。</p>
+      <p class="muted">After 1–2 minutes, tell us: could you move? win/lose/stuck? crash? play again Y/N. Mobile: on-screen D-pad + JUMP.</p>
+      <p>
+        <a class="btn" id="fb-issue" href="https://github.com/JustLoveBen/neon-rooftop-dash/issues/new?template=playtest.yml">Open feedback Issue</a>
+        <a class="btn secondary" id="fb-issue-blank" href="https://github.com/JustLoveBen/neon-rooftop-dash/issues/new?title=Playtest%20feedback%20%E2%80%94%20Hardcore%20Combat%20/%20Neon&body=%23%20Playtest%20feedback%0A%0A-%20Device%20/%20browser%3A%0A-%20Mode%20played%20%28Hardcore%20Combat%20/%20Classic%20/%20Checkpoint%20/%20Hardcore%20Night%20/%20Weekly%29%3A%0A-%20Saw%20animatable%20avatar%20%28Fox/Human%20Walk%29%20Y/N%3A%0A-%20Could%20you%20move%3F%0A-%20Win%20/%20lose%20/%20stuck%3F%0A-%20Crash%20or%20input%20bug%3F%0A-%20Play%20again%3F%20Y/N%0A-%20Notes%3A%0A">Quick Issue (prefilled)</a>
+      </p>
+      <p class="muted ops">Or paste answers in WeChat / Discord. Operators log real stranger sessions in <code>PLAYTEST_LOG.md</code> — do not invent N≥5.</p>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">Ops / health</h2>
+      <ul class="muted ops">
+        <li>Health: <a href="./bundles_index.json"><code>bundles_index.json</code></a></li>
+        <li>Weekly ops: <a href="./weekly.json"><code>weekly.json</code></a> · card above (ISO week Asia/Shanghai)</li>
+        <li>AI creation edge: <a href="./index.html?bundle=crystal_skyline_dash_84031">Crystal Skyline 84031</a> (AI Spec→compile+avatar→publish)</li>
+        <li>AI Spec wave2: <a href="./index.html?bundle=aispec_hardcore_wave2_84150">aispec_hardcore_wave2_84150</a> (wave2_* + Wolf avatar_opt via compiler)</li>
+        <li>Hardcore Combat V7: <a href="./index.html?bundle=neon_hardcore_combat_84123">neon_hardcore_combat_84123</a> (3-wave hunt + same-side cover nav + telegraph/pincer/LOS chase + stamina DASH + EMP + hit/death camera + looped locomotion/attack clips + footstep/ambience + 5-fragment debris lane-block)</li>
+        <li>DSH ceiling: <a href="./index.html?bundle=dsh_ceiling_hunt_T04">dsh_ceiling_hunt_T04</a> (combat hunt soft-ship)</li>
+        <li>Optional bus LB: <code>?bus=http://127.0.0.1:8787</code> (local V0; soft-fail to device)</li>
+        <li>Read-only bus snapshot: <a href="./bus_leaderboard_snapshot.json"><code>bus_leaderboard_snapshot.json</code></a> (refresh via <code>tools/export_bus_lb_snapshot.py</code>)</li>
+        <li>Inspect telemetry: open DevTools → Console filter <code>aigame-telemetry</code>, or <code>AIGAME_TELEMETRY.dump()</code></li>
+        <li>Optional beacon: set <code>window.AIGAME_TELEMETRY_URL</code> (e.g. httpbin) before load — default is local-only</li>
+        <li>Early <code>BUNDLE REJECTED</code> flash while wasm/pck boots: ignore if HUD settles to title/GO (or <code>cp=0/N</code>). Only treat as gate fail if it stays after load. Tamper URL above is the real reject check.</li>
+        <li>Recruit: <a href="#playtest-feedback">feedback card above</a> · share blurb in RECRUIT · G-FINAL still needs <strong>N≥5 real stranger</strong> logs (no fakes)</li>
+      </ul>
+      <footer>AI Game Platform · Neon soft-launch · G-FINAL not claimed</footer>
+    </div>
+  </div>
+  <script src="./leaderboard.js"></script>
+  <script src="./telemetry.js"></script>
+  <script src="./weekly.js"></script>
+  <script>
+    (function () {
+      function fmtMs(ms) {
+        if (ms == null || typeof ms !== "number") return "—";
+        return (ms / 1000).toFixed(2) + "s";
+      }
+      function rowHtml(e, i) {
+        var label = e.result || "?";
+        if (e.campaign) label += " · campaign";
+        if (e.tier) label += " · " + e.tier;
+        if (e.name && e.name !== "anon") label += " · " + e.name;
+        var live = e.source === "bus_live_v0"
+          ? ' <span class="tag" title="live L3 bus row">live</span>' : "";
+        return "<tr><td>" + (i + 1) + "</td><td>" + label + live +
+          "</td><td>" + fmtMs(e.elapsed_ms) + "</td><td><code>" + (e.bundle || "") +
+          "</code></td><td>" + (e.ts || "").replace("T", " ").slice(0, 19) + "</td></tr>";
+      }
+      function campaignRowHtml(e, i) {
+        var ticks = e.campaign_total_ticks != null ? e.campaign_total_ticks : "—";
+        var stage = (e.campaign_stage != null ? e.campaign_stage : "?") + "/" +
+          (e.campaign_stages != null ? e.campaign_stages : "?");
+        var chain = e.bundle_chain || e.bundle || "";
+        var shared = e.source === "bus_live_v0"
+          ? ' <span class="tag" title="live L3 bus row">live</span>'
+          : e.source === "bus_snapshot_v0"
+          ? ' <span class="tag" title="read-only L3 bus snapshot">shared</span>' : "";
+        var who = e.name && e.name !== "anon" ? " · " + e.name : "";
+        return "<tr><td>" + (i + 1) + "</td><td><strong>" + (e.tier || "?") +
+          "</strong>" + shared + who + "</td><td>" + fmtMs(e.elapsed_ms) + "</td><td><code>" + ticks +
+          "</code></td><td>" + stage + "</td><td><code>" + chain + "</code></td></tr>";
+      }
+      function renderGlobal() {
+        var rows = (window.AIGAME_LEADERBOARD && AIGAME_LEADERBOARD.top(15)) || [];
+        var tb = document.getElementById("lb-body");
+        if (!tb) return;
+        if (!rows.length) {
+          tb.innerHTML = '<tr><td colspan="5" class="muted">No scores yet — play a match first.</td></tr>';
+          return;
+        }
+        tb.innerHTML = rows.map(rowHtml).join("");
+      }
+      function featuredWeekly() {
+        var ch = window.AIGAME_WEEKLY_CURRENT || {};
+        return {
+          week_id: ch.week_id || "2026-W44",
+          bundle_id: ch.bundle_id || "neon_hardcore_combat_84123",
+          title: ch.title || "Hardcore Combat — Weekly Hunt"
+        };
+      }
+      function setSourceBadge(elId, res) {
+        var el = document.getElementById(elId);
+        if (!el) return;
+        var src = (res && res.source) || "device";
+        var badge = (res && res.badge) ||
+          (src === "live" ? "Live" : src === "snapshot" ? "Snapshot+Device" : "Device");
+        el.setAttribute("data-source", src);
+        el.textContent = badge;
+        el.title = src === "live"
+          ? "Live — a bus leaderboard top/submit succeeded for this week in this page session"
+          : src === "snapshot"
+          ? "Snapshot — read-only CDN bus_leaderboard_snapshot.json merged with device rows"
+          : "Device — localStorage only; no successful live bus call";
+      }
+      function setSourceNote(res, failed) {
+        var el = document.getElementById("lb-source-note");
+        if (!el) return;
+        var src = (res && res.source) || "device";
+        var badge = (res && res.badge) ||
+          (src === "live" ? "Live" : src === "snapshot" ? "Snapshot+Device" : "Device");
+        var cls = src === "live" ? "lb-src-live" : src === "snapshot" ? "lb-src-snapshot" : "lb-src-device";
+        var rows = res && typeof res.rows === "number" ? res.rows : (res && res.bus_rows != null ? res.bus_rows : null);
+        var tail = "";
+        if (src === "live") {
+          tail = "Rows painted from the shared L3 bus top. A failed/timed-out/401 submit drops this badge immediately — it is never cached as Live.";
+        } else if (src === "snapshot") {
+          tail = "Read-only CDN <code>bus_leaderboard_snapshot.json</code> merged with this device. Live submit needs an ops bus (<code>?bus=</code> + token).";
+        } else {
+          tail = "localStorage only. Live submit needs an ops HTTPS bus + CORS + token; GitHub Pages cannot host an always-on bus.";
+        }
+        if (failed) tail = "Last bus submit failed — kept the device/snapshot board and the badge is <strong>not</strong> Live.";
+        el.innerHTML = "Source: <span class=\"" + cls + "\">" + badge + "</span>" +
+          (rows != null ? " · " + rows + " rows" : "") + " — " + tail;
+      }
+      function updateWeekLbLabel(snapMeta, src) {
+        var f = featuredWeekly();
+        var lab = document.getElementById("lb-week-label");
+        if (lab) {
+          var snapBit = "";
+          if (src && src.source === "live") {
+            snapBit = " · <strong>Live</strong> L3 bus top for this week (badge set only after a successful bus call).";
+          } else if (snapMeta && snapMeta.updated_at) {
+            snapBit = " · bus snapshot <code>updated_at=" + snapMeta.updated_at +
+              "</code> (" + (snapMeta.row_count != null ? snapMeta.row_count : "?") + " public rows)";
+          } else {
+            snapBit = " · bus snapshot pending/unavailable (device LB still works offline)";
+          }
+          lab.innerHTML = "Week <strong>" + f.week_id + "</strong> · featured <code>" +
+            f.bundle_id + "</code> (" + f.title +
+            "). Device localStorage + read-only snapshot when present; empty is honest — no fabricated scores." +
+            snapBit;
+        }
+        var tag = document.getElementById("lb-week-mode-tag");
+        if (tag) tag.textContent = (f.title.indexOf("Hardcore Combat") >= 0)
+          ? "Hardcore Combat" : (f.title.split("—")[0].trim() || "Weekly");
+      }
+      function renderCampaignBest(wid, forceFallback) {
+        var best = document.getElementById("lb-campaign-best");
+        var tbl = document.getElementById("lb-campaign-table");
+        var body = document.getElementById("lb-campaign-body");
+        var tag = document.getElementById("lb-campaign-tag");
+        if (!best || !tbodyReady(body) || !window.AIGAME_LEADERBOARD) return;
+        function paint(rows, src, snapMeta) {
+          rows = rows || [];
+          setSourceBadge("lb-campaign-source", src || { source: "device", badge: "Device" });
+          if (!rows.length) {
+            if (tag) tag.textContent = "tier";
+            best.innerHTML = "No campaign clear on this device or shared bus snapshot for <strong>" +
+              wid + "</strong> yet — play Campaign (A→B→C) and finish Core Breach. " +
+              "尚无战役通关记录（本机或共享快照）——打完 A→B→C（核心突破）后写入。" +
+              "Empty is honest; no fabricated clear time.";
+            if (tbl) tbl.hidden = true;
+            return;
+          }
+          var b = rows[0];
+          var hc = null;
+          for (var i = 0; i < rows.length; i++) {
+            if (rows[i] && rows[i].tier === "hardcore") { hc = rows[i]; break; }
+          }
+          if (tag) tag.textContent = hc ? "hardcore " + fmtMs(hc.elapsed_ms) : "tier";
+          var hcLine = hc
+            ? ("<strong>Hardcore best " + fmtMs(hc.elapsed_ms) + "</strong> · " +
+               (hc.campaign_total_ticks != null ? hc.campaign_total_ticks : "—") +
+               " ticks · stage " + (hc.campaign_stage != null ? hc.campaign_stage : "?") + "/" +
+               (hc.campaign_stages != null ? hc.campaign_stages : "?") + "<br/>" +
+               "硬核最佳：" + fmtMs(hc.elapsed_ms) + " · " + (hc.campaign_total_ticks || "—") + " tick<br/>")
+            : "No hardcore campaign clear yet / 暂无硬核战役通关<br/>";
+          var snapBit = (snapMeta && snapMeta.updated_at)
+            ? ("<br/>Shared bus snapshot <code>" + snapMeta.updated_at +
+               "</code> · " + (snapMeta.row_count != null ? snapMeta.row_count : "?") +
+               " rows · device rows win on duplicate clears.")
+            : "";
+          best.innerHTML = hcLine +
+            "Best any tier / 全难度最佳：<strong>" + fmtMs(b.elapsed_ms) + "</strong> · " +
+            (b.campaign_total_ticks != null ? b.campaign_total_ticks : "—") + " ticks · tier <strong>" +
+            (b.tier || "?") + "</strong> · chain <code>" + (b.bundle_chain || b.bundle || "") + "</code>" +
+            snapBit;
+          if (tbl && body) {
+            tbl.hidden = false;
+            body.innerHTML = rows.map(campaignRowHtml).join("");
+          }
+        }
+        var local = [];
+        if (typeof AIGAME_LEADERBOARD.topCampaign === "function") {
+          local = AIGAME_LEADERBOARD.topCampaign(10, wid) || [];
+        }
+        paint(local, { source: "device", badge: "Device" }, null);
+        var reader = forceFallback
+          ? AIGAME_LEADERBOARD.topCampaignMerged
+          : (AIGAME_LEADERBOARD.topCampaignLive || AIGAME_LEADERBOARD.topCampaignMerged);
+        if (typeof reader === "function") {
+          reader(10, wid)
+            .then(function (res) {
+              if (!res) return;
+              paint(res.rows || local, res, res.snapshot && res.snapshot.meta);
+            })
+            .catch(function () { /* keep local paint */ });
+        }
+      }
+      function tbodyReady(el) {
+        return !!el && (el.tagName ? el.tagName.toLowerCase() === "tbody" : true);
+      }
+      function renderWeekly(forceFallback) {
+        var tb = document.getElementById("lb-week-body");
+        if (!tb || !window.AIGAME_LEADERBOARD) return;
+        updateWeekLbLabel(null);
+        var f = featuredWeekly();
+        var wid = AIGAME_LEADERBOARD.resolveWeekId(
+          (window.AIGAME_WEEKLY_CURRENT && AIGAME_WEEKLY_CURRENT.week_id) || f.week_id
+        );
+        function paint(rows, src, snapMeta) {
+          updateWeekLbLabel(snapMeta || null, src || { source: "device" });
+          setSourceBadge("lb-week-source", src || { source: "device", badge: "Device" });
+          setSourceNote(src || { source: "device" });
+          rows = rows || [];
+          // Always scope week table to featured bundle (empty = honest, no other-mode bleed).
+          rows = rows.filter(function (e) { return e.bundle === f.bundle_id; });
+          if (!rows.length) {
+            tb.innerHTML = '<tr><td colspan="5" class="muted">No ' +
+              (f.title || "weekly") + " scores yet (" + f.week_id +
+              ") — play <code>?bundle=" + f.bundle_id + "&amp;weekly=1&amp;week=" +
+              f.week_id + "</code>. Empty snapshot + empty device = honest; no seeded stranger scores.</td></tr>";
+            return;
+          }
+          tb.innerHTML = rows.map(rowHtml).join("");
+        }
+        // Sync local first (offline), then live bus top or snapshot merge.
+        var localRows = wid ? AIGAME_LEADERBOARD.topWeekly(10, wid) : [];
+        paint(localRows, { source: "device", badge: "Device" }, null);
+        renderCampaignBest(wid, forceFallback);
+        var reader = forceFallback
+          ? AIGAME_LEADERBOARD.topWeeklyMerged
+          : (AIGAME_LEADERBOARD.topWeeklyLive || AIGAME_LEADERBOARD.topWeeklyMerged);
+        if (typeof reader === "function") {
+          reader(10, wid, { bundle: f.bundle_id })
+            .then(function (res) {
+              if (!res) return;
+              paint(res.rows || localRows, res, res.snapshot && res.snapshot.meta);
+            })
+            .catch(function () { /* keep local paint */ });
+        }
+      }
+      function renderAll(forceFallback) { renderGlobal(); renderWeekly(!!forceFallback); }
+      function buildShareText() {
+        var land = "https://justloveben.github.io/neon-rooftop-dash/landing.html";
+        var f = featuredWeekly();
+        var play = land.replace("landing.html", "") +
+          "index.html?bundle=" + encodeURIComponent(f.bundle_id) +
+          "&weekly=1&week=" + encodeURIComponent(f.week_id);
+        var issue = "https://github.com/JustLoveBen/neon-rooftop-dash/issues/new?template=playtest.yml";
+        var en = "Neon Rooftop Dash — this week’s Hardcore Combat V21 (pause + settings hygiene: Esc/gamepad Start/on-screen Pause freezes the deterministic tick with a _paused flag, hides the touch stick, offers Resume/Settings/Retry/Quit EN+ZH; volumes + touch stick sensitivity persist in localStorage aigame_settings_v1; plus V20 live weekly leaderboard submit + honest Live/Device/Snapshot badge: device localStorage always first, then an ops L3 bus submit via the existing leaderboard.submit contract with a top refresh, or a soft fallback that never claims Live; GitHub Pages is static so a stranger-facing Live board needs an ops HTTPS bus + CORS + token. Core game = V19: touch analog stick + DASH/EMP + phone HUD, Arena C residuals closed, geometry navmesh, HUNT_FULL A 1335 / B 1080 / C 1050 ticks with no HP/speed/wave/threshold change; plus V16 in-run retry, V15 moods, V14 coach, 4-hit PULSE→EMP; 1–2 min in browser). Play, then open a playtest Issue.";
+        var zh = "Neon 屋顶冲刺 — 本周 Hardcore Combat V21（暂停 + 设置：Esc/手柄 Start/屏幕暂停键用 _paused 冻结确定性 tick、隐藏摇杆，提供中英 Resume/Settings/Retry/Quit；音量与摇杆灵敏度写入 localStorage aigame_settings_v1；另有 V20 周榜实时提交 + 诚实 Live/Device/Snapshot 徽标：先写本机 localStorage，总线可用时按既有 leaderboard.submit 契约提交并回读 top，失败/超时/401/CORS 一律软回退且绝不显示 Live；GitHub Pages 是静态托管，陌生人可用的 Live 榜需要运维 HTTPS 总线 + CORS + token。核心玩法同 V19：触控模拟摇杆 + DASH/EMP + 手机 HUD、竞技场 C 遗留项清零、几何导航网格，HUNT_FULL A 1335 / B 1080 / C 1050 tick，血量/速度/波次/门槛全不变；另有 V16 局内重试、V15 三场氛围、V14 首分钟教练、4 连 PULSE→EMP；网页 1–2 分钟）。试玩后请开反馈 Issue。";
+        return (
+          en + "\n" +
+          zh + "\n" +
+          "Landing: " + land + "\n" +
+          "This week (" + f.week_id + "): " + f.title + "\n" +
+          "Play weekly: " + play + "\n" +
+          "Feedback Issue: " + issue + "\n" +
+          "#indiedev #webgl #playtest"
+        );
+      }
+      function buildShareIntentUrl() {
+        return "https://x.com/intent/post?text=" + encodeURIComponent(buildShareText());
+      }
+      function setBusStatus(text, showTable) {
+        var st = document.getElementById("bus-lb-status");
+        var tbl = document.getElementById("bus-lb-table");
+        if (st) {
+          st.hidden = false;
+          st.textContent = text;
+        }
+        if (tbl) tbl.hidden = !showTable;
+      }
+      function renderBusTop() {
+        if (!window.AIGAME_LEADERBOARD || !AIGAME_LEADERBOARD.busEnabled()) {
+          var st0 = document.getElementById("bus-lb-status");
+          var tbl0 = document.getElementById("bus-lb-table");
+          if (st0) st0.hidden = true;
+          if (tbl0) tbl0.hidden = true;
+          return;
+        }
+        var base = AIGAME_LEADERBOARD.resolveBusBase();
+        setBusStatus("Bus LB: contacting " + base + " …", false);
+        var ch = window.AIGAME_WEEKLY_CURRENT || {};
+        var bundle = ch.bundle_id || "neon_hardcore_combat_84123";
+        AIGAME_LEADERBOARD.topFromBus(10, { bundle: bundle, week: ch.week_id || "" })
+          .then(function (rows) {
+            var tb = document.getElementById("lb-bus-body");
+            if (!tb) return;
+            if (!rows || !rows.length) {
+              setBusStatus("Live LB: connected @ " + base + " (empty top for this bucket — play with ?bus= + token to submit). The week board above shows Live only after a successful bus call.", true);
+              tb.innerHTML = '<tr><td colspan="5" class="muted">No live bus scores yet for this week/bucket.</td></tr>';
+              return;
+            }
+            setBusStatus("Live LB: bus top from " + base + " (V0 file-backed on the ops host; Pages default stays device + snapshot).", true);
+            tb.innerHTML = rows.map(rowHtml).join("");
+          })
+          .catch(function () {
+            setBusStatus("Live LB: unreachable — board stays device + read-only snapshot, badge is not Live (expected on HTTPS Pages → HTTP localhost / no ops bus).", false);
+          });
+        // Soft-fail path when topFromBus returns soft_fail via empty+network:
+        // topFromBus already maps failures to []. Also probe health for clearer status.
+        if (AIGAME_LEADERBOARD.busCall) {
+          AIGAME_LEADERBOARD.busCall("health", "status", {}).then(function (h) {
+            if (h && h.soft_fail) {
+              setBusStatus("Live LB: offline (" + (h.reason || h.message || "soft_fail") + ") — device/snapshot board only; badge not Live.", false);
+            }
+          });
+        }
+      }
+      renderAll();
+      renderBusTop();
+      window.addEventListener("aigame-lb-updated", renderAll);
+      window.addEventListener("aigame-bus-lb", function (ev) {
+        var d = (ev && ev.detail) || {};
+        if (d.ok === false) {
+          // Honest failure: keep the device/snapshot board; never claim Live.
+          var src = { source: d.source || "device", badge: d.badge || "Device" };
+          setSourceBadge("lb-week-source", src);
+          setSourceBadge("lb-campaign-source", src);
+          setSourceNote(src, true);
+          var st = document.getElementById("bus-lb-status");
+          if (st) {
+            st.hidden = false;
+            st.textContent = "Live submit failed (" + (d.reason || "error") +
+              ") — repainting the device/snapshot board; badge is not Live.";
+          }
+          var busTbl = document.getElementById("bus-lb-table");
+          if (busTbl) busTbl.hidden = true;
+          var busBody = document.getElementById("lb-bus-body");
+          if (busBody) busBody.innerHTML = '<tr><td colspan="5" class="muted">—</td></tr>';
+          // Drop the stale live rows/paint: a failed submit must not leave a
+          // board that looks live.  forceFallback skips the bus entirely.
+          renderAll(true);
+          return;
+        }
+        renderAll();
+        renderBusTop();
+      });
+      var ex = document.getElementById("lb-export");
+      if (ex) ex.onclick = function () {
+        if (!window.AIGAME_LEADERBOARD) return;
+        AIGAME_LEADERBOARD.download();
+        document.getElementById("lb-io").value = AIGAME_LEADERBOARD.exportJSON();
+      };
+      var im = document.getElementById("lb-import");
+      if (im) im.onclick = function () {
+        var t = document.getElementById("lb-io").value;
+        var r = AIGAME_LEADERBOARD.importJSON(t, "merge");
+        alert(r.ok ? ("Imported — " + r.count + " entries on device") : ("Import failed: " + r.error));
+        renderAll();
+      };
+      var cl = document.getElementById("lb-clear");
+      if (cl) cl.onclick = function () {
+        if (confirm("Clear this browser's Neon leaderboard (all-time key)?")) {
+          AIGAME_LEADERBOARD.clear();
+          renderAll();
+        }
+      };
+      var sc = document.getElementById("share-copy");
+      if (sc) sc.onclick = function () {
+        var text = buildShareText();
+        var hint = document.getElementById("share-hint");
+        function ok() {
+          if (hint) hint.textContent = "Copied EN+ZH one-liners + Hardcore Combat weekly URL + Issue (not posted).";
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok).catch(function () {
+            prompt("Copy share text:", text);
+            ok();
+          });
+        } else {
+          prompt("Copy share text:", text);
+          ok();
+        }
+      };
+      var si = document.getElementById("share-intent-open");
+      if (si) {
+        si.href = buildShareIntentUrl();
+        si.onclick = function (ev) {
+          // Refresh intent from current week/bundle; owner opens manually (no auto-post by bot).
+          si.href = buildShareIntentUrl();
+          var hint = document.getElementById("share-hint");
+          if (hint) hint.textContent = "Opening X intent with EN+ZH one-liners + weekly Hardcore Combat + Issue (you confirm post).";
+        };
+      };
+      var hint = document.getElementById("telem-hint");
+      if (hint && window.AIGAME_TELEMETRY) {
+        hint.textContent = "Telemetry mode: " + AIGAME_TELEMETRY.mode +
+          (AIGAME_TELEMETRY.endpoint ? (" → " + AIGAME_TELEMETRY.endpoint) : " (console + localStorage; no backend)");
+      }
+      // V12 tier picker: explicit campaign buttons + one selector for solo A/B/C.
+      (function initTierPicker() {
+        var allowed = ["casual", "core", "hardcore"];
+        function readTier() {
+          var t = "";
+          try {
+            t = new URLSearchParams(location.search).get("tier") || "";
+          } catch (e0) {}
+          if (!t) {
+            try { t = localStorage.getItem("aigame_tier_v1") || ""; } catch (e1) {}
+          }
+          t = String(t || "").toLowerCase();
+          return allowed.indexOf(t) >= 0 ? t : "hardcore";
+        }
+        function paint(t) {
+          document.querySelectorAll("[data-solo-tier]").forEach(function (a) {
+            try {
+              var u = new URL(a.getAttribute("href"), location.href);
+              u.searchParams.set("tier", t);
+              a.setAttribute("href", "./" + u.pathname.split("/").pop() + u.search);
+            } catch (e) {}
+          });
+          document.querySelectorAll("[data-tier-link]").forEach(function (a) {
+            var on = a.getAttribute("data-tier-link") === t;
+            a.className = on ? "btn" : "btn secondary";
+            a.setAttribute("aria-pressed", on ? "true" : "false");
+            a.onclick = function () {
+              try { localStorage.setItem("aigame_tier_v1", a.getAttribute("data-tier-link")); } catch (e) {}
+            };
+          });
+          var sel = document.getElementById("tier-select");
+          if (sel) sel.value = t;
+          try { localStorage.setItem("aigame_tier_v1", t); } catch (e2) {}
+        }
+        var initial = readTier();
+        var sel = document.getElementById("tier-select");
+        if (sel) {
+          sel.value = initial;
+          sel.onchange = function () { paint(sel.value); };
+        }
+        paint(initial);
+      })();
+      window.AIGAME_TELEMETRY && AIGAME_TELEMETRY.ping("landing_view", { title: "neon_rooftop_dash" });
+      var mount = window.AIGAME_WEEKLY_API
+        ? AIGAME_WEEKLY_API.loadAndMount("./weekly.json")
+        : Promise.resolve(null);
+      Promise.resolve(mount).then(function () {
+        renderWeekly();
+        var si2 = document.getElementById("share-intent-open");
+        if (si2) si2.href = buildShareIntentUrl();
+      });
+    })();
+  </script>
+
+  <script>
+    // Combat V21 — landing settings writer.  Same key/shape Godot reads on boot.
+    (function () {
+      var KEY = "aigame_settings_v1";
+      var DEFAULTS = { master: 1, sfx: 1, music: 1, stick_sens: 1 };
+      var card = document.getElementById("settings-card");
+      var openBtn = document.getElementById("settings-open");
+      var closeBtn = document.getElementById("settings-close");
+      var status = document.getElementById("settings-status");
+      if (!card || !openBtn || !closeBtn) return;
+      var fields = [
+        { key: "master", input: "set-master", out: "set-master-val", min: 0, max: 100, lo: 0, hi: 1 },
+        { key: "sfx", input: "set-sfx", out: "set-sfx-val", min: 0, max: 100, lo: 0, hi: 1 },
+        { key: "music", input: "set-music", out: "set-music-val", min: 0, max: 100, lo: 0, hi: 1 },
+        { key: "stick_sens", input: "set-stick", out: "set-stick-val", min: 50, max: 150, lo: 0.5, hi: 1.5 }
+      ];
+      function clamp(v, lo, hi, d) {
+        v = parseFloat(v);
+        if (!isFinite(v)) v = d;
+        return Math.max(lo, Math.min(hi, v));
+      }
+      function load() {
+        var raw = null;
+        try { raw = localStorage.getItem(KEY); } catch (e) { raw = null; }
+        var o = {};
+        try { o = raw ? JSON.parse(raw) : {}; } catch (e) { o = {}; }
+        return {
+          master: clamp(o.master, 0, 1, DEFAULTS.master),
+          sfx: clamp(o.sfx, 0, 1, DEFAULTS.sfx),
+          music: clamp(o.music, 0, 1, DEFAULTS.music),
+          stick_sens: clamp(o.stick_sens, 0.5, 1.5, DEFAULTS.stick_sens)
+        };
+      }
+      function save(s) {
+        try {
+          localStorage.setItem(KEY, JSON.stringify({
+            master: Math.round(s.master * 100) / 100,
+            sfx: Math.round(s.sfx * 100) / 100,
+            music: Math.round(s.music * 100) / 100,
+            stick_sens: Math.round(s.stick_sens * 100) / 100
+          }));
+          return true;
+        } catch (e) { return false; }
+      }
+      var state = load();
+      function paint() {
+        fields.forEach(function (f) {
+          var input = document.getElementById(f.input);
+          var out = document.getElementById(f.out);
+          if (!input) return;
+          var v = state[f.key];
+          var slider = f.key === "stick_sens" ? Math.round(v * 100) : Math.round(v * 100);
+          input.value = String(slider);
+          if (out) {
+            out.textContent = f.key === "stick_sens"
+              ? slider + "% (×" + v.toFixed(2) + ")"
+              : slider + "%";
+          }
+        });
+      }
+      function onInput(f) {
+        var input = document.getElementById(f.input);
+        if (!input) return;
+        var raw = parseFloat(input.value);
+        var v = clamp(raw / 100, f.lo, f.hi, DEFAULTS[f.key]);
+        state[f.key] = v;
+        var out = document.getElementById(f.out);
+        if (out) {
+          out.textContent = f.key === "stick_sens"
+            ? Math.round(v * 100) + "% (×" + v.toFixed(2) + ")"
+            : Math.round(v * 100) + "%";
+        }
+        var ok = save(state);
+        if (status) status.textContent = ok ? "Saved / 已保存" : "Session only / 仅本次";
+      }
+      fields.forEach(function (f) {
+        var input = document.getElementById(f.input);
+        if (input) input.addEventListener("input", function () { onInput(f); });
+      });
+      function show(open) {
+        card.hidden = !open;
+        openBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) {
+          state = load();
+          paint();
+          if (status) status.textContent = "Loaded / 已读取";
+          card.scrollIntoView({ block: "nearest", behavior: "smooth" });
+        }
+      }
+      openBtn.addEventListener("click", function () { show(card.hidden); });
+      closeBtn.addEventListener("click", function () { show(false); });
+      paint();
+      window.AIGAME_SETTINGS = { key: KEY, read: load, state: function () { return state; } };
+    })();
+  </script>
+</body>
+</html>

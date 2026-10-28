@@ -1,0 +1,73 @@
+name: Playtest feedback
+description: 1–2 min Neon Rooftop Dash stranger playtest notes
+title: "Playtest: "
+labels: ["playtest"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying **Neon Rooftop Dash** (≈1–2 min). Prefer **Hardcore Combat** (Fox hunt + animatable avatar) or this week’s challenge:
+        https://justloveben.github.io/neon-rooftop-dash/landing.html
+        Direct: https://justloveben.github.io/neon-rooftop-dash/index.html?bundle=neon_hardcore_combat_84123
+        Mobile: on-screen D-pad + JUMP (+ PULSE near foes). Desktop: click canvas, WASD + Space.
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode played
+      options:
+        - Hardcore Combat (84123) — preferred
+        - Weekly challenge
+        - Classic (84021)
+        - Checkpoint Run (84022)
+        - Hardcore Night (84023)
+        - More than one
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: avatar
+    attributes:
+      label: Saw animatable avatar (Fox/Human Walk on move)?
+      options: ["Yes — Walk/Run mesh", "No — capsule only", "Not sure"]
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device / browser
+      placeholder: "iPhone Safari / Windows Chrome / …"
+    validations:
+      required: true
+  - type: dropdown
+    id: move
+    attributes:
+      label: Could you move after focus / tap?
+      options: ["Yes", "No", "Partially"]
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Outcome
+      options: ["Win (Clear!)", "Lose (timeout/fall)", "Stuck / soft-lock", "Did not finish"]
+    validations:
+      required: true
+  - type: dropdown
+    id: crash
+    attributes:
+      label: Crash / black screen / input freeze?
+      options: ["No", "Yes — describe below"]
+    validations:
+      required: true
+  - type: dropdown
+    id: again
+    attributes:
+      label: Would play again?
+      options: ["Y", "N", "Maybe"]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      placeholder: Anything confusing, unfair, or broken…
